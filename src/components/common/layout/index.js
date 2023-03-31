@@ -9,7 +9,7 @@ import Footer from "./footer";
 
 const Layout = () => {
   return (
-    <div className="flex flex-col bg-[#F5F6FA] ">
+    <div className="flex flex-col bg-[#F5F6FA]  mx-auto ">
       <div className="sm:px-10 relative mb-40 z-10">
         <Header />
       </div>

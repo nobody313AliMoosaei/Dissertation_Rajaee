@@ -72,7 +72,7 @@ const Information = () => {
         <span className="lg:text-4xl md::text-2xl text-xl text-center font-bold">
           سامانه ثبت پایان نامه دانشگاه تربیت دبیر شهید رجایی
         </span>
-        <span className="text-center lg:w-3/4 md:text-xl text-base my-5 font-medium text-[#3c414e] ">
+        <span className="text-center lg:w-3/4 md:text-lg text-base my-5 font-medium text-[#3c414e] ">
           لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
           از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
           سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
@@ -85,7 +85,7 @@ const Information = () => {
           <span className="text-xl font-medium text-[#003B7E]" id="graduation">
             0
           </span>
-          <span className="text-xl font-medium">مقالات</span>
+          <span className="text-lg font-medium">مقالات</span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <Student />
@@ -95,21 +95,21 @@ const Information = () => {
           >
             0
           </span>
-          <span className="text-xl font-medium">واحد اموزشی</span>
+          <span className="text-lg font-medium">واحد اموزشی</span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <Student />
           <span className="text-xl font-medium text-[#003B7E]" id="supervisor">
             0
           </span>
-          <span className="text-xl font-medium">استاد راهنما</span>
+          <span className="text-lg font-medium">استاد راهنما</span>
         </div>
         <div className="flex flex-col items-center gap-2">
           <Student />
           <span className="text-xl font-medium text-[#003B7E]" id="masterJudge">
             0
           </span>
-          <span className="text-xl font-medium">استاد داور</span>
+          <span className="text-lg font-medium">استاد داور</span>
         </div>
       </div>
     </div>

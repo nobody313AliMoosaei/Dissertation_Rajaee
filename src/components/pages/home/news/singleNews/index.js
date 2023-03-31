@@ -16,11 +16,11 @@ const SingleNews = ({ title, date, text }) => {
             <span className=" mx-2 text-lg">{date}</span>
             <Calendar />
           </div>
-          <span className="text-center text-xl font-bold mb-2">{title}</span>
-          <span className=" text-lg h-14 overflow-hidden  overflow-ellipsis ">
+          <span className="text-center text-lg font-bold mb-2">{title}</span>
+          <span className=" text-base h-12 overflow-hidden  overflow-ellipsis ">
             {text}
           </span>
-          <button className="my-2 border-2 border-[#ffa500] p-2">
+          <button className="my-2 border-2 border-[#003B7E] p-2">
             بیشتر بخوانید
           </button>
         </div>

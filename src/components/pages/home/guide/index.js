@@ -14,21 +14,21 @@ const Guide = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
         <div className="flex flex-col items-center gap-5 bg-[#fff] p-5 rounded-md w-60">
-          <div className="p-4 bg-[#ffa500] rounded-full">
+          <div className="p-4 bg-[#5e81d129] rounded-full">
             <Pen className="" />
           </div>
           <span>گام اول</span>
           <span className="text-lg font-bold">تکمیل اطلاعات شخصی</span>
         </div>
         <div className="flex flex-col items-center gap-5 bg-[#fff] p-5 rounded-md w-60">
-          <div className="p-4 bg-[#ffa500] rounded-full">
+          <div className="p-4 bg-[#5e81d129] rounded-full">
             <Pen className="" />
           </div>
           <span>گام دوم</span>
           <span className="text-lg font-bold">تکمیل مشخصات پایان نامه</span>
         </div>
         <div className="flex flex-col items-center gap-5 bg-[#fff] p-5 rounded-md w-60">
-          <div className="p-4 bg-[#ffa500] rounded-full">
+          <div className="p-4 bg-[#5e81d129] rounded-full">
             <Pen className="" />
           </div>
           <span>گام سوم</span>
