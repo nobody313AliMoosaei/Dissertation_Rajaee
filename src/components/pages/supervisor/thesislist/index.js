@@ -57,20 +57,6 @@ const ThesisList = ({ check }) => {
       number: "3981231093",
       title: " پایان‌نامه",
     },
-    {
-      id: "6",
-      name: "علی",
-      family: "محجوب",
-      number: "3981231093",
-      title: " پایان‌نامه",
-    },
-    {
-      id: "7",
-      name: "علی",
-      family: "محجوب",
-      number: "3981231093",
-      title: " پایان‌نامه",
-    },
   ];
   return (
     <div className="container mx-auto w-10/12">
@@ -125,23 +111,17 @@ const ThesisList = ({ check }) => {
           <span className="hidden sm:block sm:col-span-2">عنوان</span>
         </div>
         {Array.isArray(thesis) &&
-          thesis.map((item, index) =>
-            index >= (indexList - 1) * 4 && index < indexList * 4 ? (
-              <div>
-                <SingleList
-                  check={check}
-                  key={index}
-                  id={item.id}
-                  name={item.name}
-                  family={item.family}
-                  number={item.number}
-                  title={item.title}
-                />
-              </div>
-            ) : (
-              <></>
-            )
-          )}
+          thesis.map((item, index) => (
+            <SingleList
+              check={check}
+              key={index}
+              id={item.id}
+              name={item.name}
+              family={item.family}
+              number={item.number}
+              title={item.title}
+            />
+          ))}
       </div>
       <Pagination
         count={thesis.length}

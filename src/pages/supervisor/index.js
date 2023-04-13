@@ -9,11 +9,7 @@ const Supervisor = () => {
     setShowThesisDetail(!showThesisDetail);
   };
   return (
-    <div
-      className={`bg-[#F5F6FA] w-full pb-10 ${
-        showThesisDetail ? "h-[100%]" : "h-[100vh]"
-      }`}
-    >
+    <div className={`bg-[#F5F6FA] w-full pb-10 min-h-screen h-full `}>
       <HeaderSupervisor />
       {showThesisDetail ? (
         <ThesisDetails check={check} />

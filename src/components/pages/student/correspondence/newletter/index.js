@@ -21,24 +21,10 @@ const Newletter = () => {
     <div
       className={`flex flex-col gap-3 bg-white   rounded-md md:w-3/4 p-8 mt-10`}
     >
-      {/* {showMassage ? (
-        <div
-          onClick={() => setShowMassage(0)}
-          className="flex flex-row border-solid border-2 rounded-md w-fit border-[#003b7e73] mb-1 px-2 py-1 items-center"
-        >
-          <Back />
-          <button className=" pr-2 text-lg text-[#003B7E]">بازگشت</button>
-        </div>
-      ) : (
-        <></>
-      )} */}
       <div className="flex flex-col w-fit gap-2 ">
-        <sapn className="sm:text-base font-medium text-sm">گیرنده</sapn>
+        <span className="sm:text-base font-medium text-sm">گیرنده</span>
 
         <select className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm ">
-          {/* <option disabled={true} selected value="" className="">
-            گیرنده مورد نظر خود را انتخاب کنید
-          </option> */}
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
@@ -51,7 +37,7 @@ const Newletter = () => {
         <input className="border-2 h-10 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md p-1 sm:text-base text-sm " />
       </div>
       <div className="flex flex-col gap-2 sm:w-3/4 md:w-full lg:w-3/4 w-full ">
-        <sapn className="sm:text-base font-medium text-sm">متن</sapn>
+        <span className="sm:text-base font-medium text-sm">متن</span>
         <textarea
           className="border-2  focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-36 resize-none h-28 p-1 sm:text-base text-sm "
           name="postConteant"

@@ -151,35 +151,35 @@ const ThesisDetails = ({ check }) => {
         </div>
         <div className=" grid grid-cols-1 md:grid-cols-2 lg:gap-x-8 gap-x-2 gap-y-6">
           <div className="flex gap-2">
-            <sapn className="sm:text-base font-medium text-sm">
+            <span className="sm:text-base font-medium text-sm">
               عنوان پایان‌نامه(فارسی):{" "}
-            </sapn>
-            <sapn className="sm:text-base font-medium text-[#B0B9BE] text-sm">
+            </span>
+            <span className="sm:text-base font-medium text-[#B0B9BE] text-sm">
               عنوان پایان‌نامه
-            </sapn>
+            </span>
           </div>
           <div className="flex gap-2">
-            <sapn className="sm:text-base font-medium text-sm">
+            <span className="sm:text-base font-medium text-sm">
               عنوان پایان‌نامه(انگلیسی):{" "}
-            </sapn>
-            <sapn className="sm:text-base font-medium text-[#B0B9BE] text-sm">
+            </span>
+            <span className="sm:text-base font-medium text-[#B0B9BE] text-sm">
               عنوان پایان‌نامه
-            </sapn>
+            </span>
           </div>
           <div className="flex flex-col">
-            <sapn className="sm:text-base font-medium text-sm">
+            <span className="sm:text-base font-medium text-sm">
               واژگان(فارسی){" "}
-            </sapn>
+            </span>
             <span className="border-2 h-24 p-2 rounded-md">واژگان</span>
           </div>
           <div className="flex flex-col">
-            <sapn className="sm:text-base font-medium text-sm">
+            <span className="sm:text-base font-medium text-sm">
               واژگان(انگلیسی){" "}
-            </sapn>
+            </span>
             <span className="border-2 h-24 p-2 rounded-md">vocabulary</span>
           </div>
           <div className="flex flex-col md:col-span-2">
-            <sapn className="sm:text-base font-medium text-sm">چکیده</sapn>
+            <span className="sm:text-base font-medium text-sm">چکیده</span>
             <span className="border-2 h-32   p-2 rounded-md">چکیده</span>
           </div>
         </div>
@@ -216,6 +216,7 @@ const ThesisDetails = ({ check }) => {
                     ? `border-2  mt-5 rounded-md p-2  border-[#B0B9BE]`
                     : ""
                 }`}
+                key={index}
               >
                 <Comment
                   styl={""}

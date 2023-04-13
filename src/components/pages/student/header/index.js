@@ -15,18 +15,13 @@ const Header = () => {
   const toggleOpenProfile = () => {
     setOpenprofile(!openProfile);
   };
-  // document.body.addEventListener("click", () => {
-  //   if (openProfile) {
-  //     toggleOpenProfile();
-  //   }
-  // });
 
-  const [Time, setTime] = useState(new Date().toLocaleTimeString("fa-IR"));
-  useEffect(() => {
-    setInterval(() => {
-      setTime(new Date().toLocaleTimeString("fa-IR"));
-    }, 1000);
-  });
+  // const [Time, setTime] = useState(new Date().toLocaleTimeString("fa-IR"));
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setTime(new Date().toLocaleTimeString("fa-IR"));
+  //   }, 1000);
+  // });
 
   let options = { year: "numeric", month: "long", day: "numeric" };
   let today = new Date().toLocaleDateString("fa-IR", options);
@@ -58,9 +53,9 @@ const Header = () => {
         </div>
       </div>
       <div className="flex flex-row gap-4">
-        <sapn>
+        <p>
           سلام ،<span className="px-2"> کاربر عزیز</span>عزیز خوش آمدی&#128075;
-        </sapn>
+        </p>
         <span className="font-bold text-lg">|</span>
         <div className="flex gap-4 ">
           {/* <span>{Time}</span> */}

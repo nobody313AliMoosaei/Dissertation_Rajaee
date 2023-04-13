@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 // Components
 import ListLetter from "../listletter";
-import Newletter from "../newletter";
+import DetailLetter from "../detailletter";
 
 const ReceivedLetter = ({ status }) => {
   const [showMassage, setShowMassage] = useState(0);
@@ -60,7 +60,7 @@ const ReceivedLetter = ({ status }) => {
           <div className="grid grid-cols-12 border-b-2 py-1">
             <span className="col-span-1">#</span>
             <span className="col-span-2">
-              {status === 2 ? "گیرنده" : "ارسال کننده"}
+              {status === 3 ? "گیرنده" : "ارسال کننده"}
             </span>
             <span className="col-span-3">عنوان</span>
             <span className="col-span-4">متن</span>
@@ -68,6 +68,7 @@ const ReceivedLetter = ({ status }) => {
           <div className="max-h-64 flex flex-col gap-3 overflow-y-scroll ">
             {letter.map((item, index) => (
               <ListLetter
+                key={index}
                 number={index}
                 title={item.title}
                 text={item.text}
@@ -78,7 +79,10 @@ const ReceivedLetter = ({ status }) => {
           </div>
         </div>
       ) : (
-        <Newletter />
+        <DetailLetter
+          item={letter[showMassage - 1]}
+          setShowMassage={setShowMassage}
+        />
       )}
     </div>
   );

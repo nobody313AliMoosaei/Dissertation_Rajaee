@@ -12,8 +12,8 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
   const [listPersianVocabulary, setListPersianVocabulary] = useState([]);
   const addCliclHandler = (name) => {
     if (
-      englishVocabulary != undefined &&
-      englishVocabulary != "" &&
+      englishVocabulary !== undefined &&
+      englishVocabulary !== "" &&
       name === "english"
     ) {
       setListEnglishVocabulary((listEnglishVocabulary) => [
@@ -23,8 +23,8 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
       setEnglishVocabulary("");
     }
     if (
-      persianVocabulary != undefined &&
-      persianVocabulary != "" &&
+      persianVocabulary !== undefined &&
+      persianVocabulary !== "" &&
       name === "persian"
     ) {
       setListPersianVocabulary((listPersianVocabulary) => [
@@ -67,9 +67,9 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
         </div>
         <div className=" grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
           <div className="flex flex-col">
-            <sapn className="sm:text-base font-medium text-sm">
+            <span className="sm:text-base font-medium text-sm">
               عنوان پایان‌نامه(فارسی){" "}
-            </sapn>
+            </span>
             <input
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
               placeholder="عنوان پایان‌نامه را وارد کنید"
@@ -77,9 +77,9 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
             />
           </div>
           <div className="flex flex-col">
-            <sapn className="sm:text-base font-medium text-sm">
+            <span className="sm:text-base font-medium text-sm">
               عنوان پایان‌نامه(انگلیسی){" "}
-            </sapn>
+            </span>
             <input
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
               placeholder="عنوان پایان‌نامه را وارد کنید"
@@ -87,7 +87,7 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
             />
           </div>
           <div className="flex flex-col md:col-span-2">
-            <sapn className="sm:text-base font-medium text-sm">چکیده</sapn>
+            <span className="sm:text-base font-medium text-sm">چکیده</span>
             <textarea
               className="border-2  focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-20 resize-none h-16 p-1 sm:text-base text-sm "
               name="postConteant"
@@ -96,12 +96,11 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
           </div>
           <div className="sm:h-28 flex flex-col gap-2 lg:col-span-1 md:col-span-2">
             <div className="flex sm:flex-row sm:items-center flex-col items-start gap-1">
-              <sapn className="sm:text-base font-medium text-sm">
+              <span className="sm:text-base font-medium text-sm">
                 واژگان(فارسی):{" "}
-              </sapn>
+              </span>
               <div className="flex">
                 <input
-                  Lang="fa-IR"
                   onChange={(event) => setPersianVocabulary(event.target.value)}
                   onKeyDown={(e) => handleKeyDown(e, "persian")}
                   value={persianVocabulary}
@@ -116,7 +115,7 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
                 </div>
               </div>
             </div>
-            {listPersianVocabulary.length != 0 ? (
+            {listPersianVocabulary.length !== 0 ? (
               <div className="flex flex-wrap gap-3 overflow-y-scroll h-full border-2 border-[#9B9B9B] rounded-md">
                 {listPersianVocabulary.map((item, index) => (
                   <div className="flex items-center text-[#000]">
@@ -131,18 +130,12 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
             ) : (
               <></>
             )}
-            {/* <textarea
-              className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-16 resize-none h-10 p-1 sm:text-base text-sm "
-              name="postContent"
-              placeholder="واژگان را وارد کنید"
-              rows={4}
-            /> */}
           </div>
           <div className="sm:h-28 flex flex-col gap-2 lg:col-span-1 md:col-span-2">
             <div className="flex sm:flex-row sm:items-center flex-col items-start  gap-1">
-              <sapn className="sm:text-base font-medium text-sm">
+              <span className="sm:text-base font-medium text-sm">
                 واژگان(انگلیسی):{" "}
-              </sapn>
+              </span>
               <div className="flex gap-1">
                 <input
                   pattern="[A-Za-z]"
@@ -164,7 +157,7 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
                 </div>
               </div>
             </div>
-            {listEnglishVocabulary.length != 0 ? (
+            {listEnglishVocabulary.length !== 0 ? (
               <div className="flex flex-wrap gap-3 overflow-y-scroll h-20 border-2 border-[#9B9B9B] rounded-md">
                 {listEnglishVocabulary.map((item, index) => (
                   <div className="flex items-center text-[#000]">
@@ -179,12 +172,6 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
             ) : (
               <></>
             )}
-            {/* <textarea
-              className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-16 resize-none h-10 p-1 sm:text-base text-sm "
-              name="postContent"
-              placeholder="واژگان را وارد کنید"
-              rows={4}
-            /> */}
           </div>
         </div>
         <div className="flex flex-row-reverse justify-between">
@@ -194,12 +181,6 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
           >
             مرحله بعدی
           </button>
-          {/* <button
-            onClick={stepBackwardHandler}
-            className="bg-[#003b7e29] sm:px-4 self-start p-2 mt-6 rounded-md text-lg text-[#003B7E]"
-          >
-            بازگشت
-          </button> */}
         </div>
       </div>
     </div>

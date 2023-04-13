@@ -88,9 +88,9 @@ const Profile = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-x-8 gap-x-2 md:gap-y-6 gap-y-2 w-full">
             <div className="flex flex-col">
-              <sapn className="sm:text-base self-start font-medium text-sm">
+              <span className="sm:text-base self-start font-medium text-sm">
                 نام{" "}
-              </sapn>
+              </span>
               <input
                 value={information[0].name}
                 className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
@@ -100,9 +100,9 @@ const Profile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <sapn className="sm:text-base self-start font-medium text-sm">
+              <span className="sm:text-base self-start font-medium text-sm">
                 نام خانوادگی
-              </sapn>
+              </span>
               <input
                 required
                 value={information[0].family}
@@ -112,9 +112,9 @@ const Profile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <sapn className="sm:text-base self-start font-medium text-sm">
+              <span className="sm:text-base self-start font-medium text-sm">
                 شماره دانشجویی
-              </sapn>
+              </span>
               <input
                 required
                 value={information[0].studentNumber}
@@ -124,7 +124,7 @@ const Profile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <sapn className="sm:text-base font-medium text-sm">دانشکده</sapn>
+              <span className="sm:text-base font-medium text-sm">دانشکده</span>
               <select className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm ">
                 <option selected disabled={true} value="" className="">
                   دانشکده
@@ -137,9 +137,9 @@ const Profile = () => {
               </select>
             </div>
             <div className="flex flex-col">
-              <sapn className="sm:text-base font-medium text-sm">
+              <span className="sm:text-base font-medium text-sm">
                 استاد راهنما (اجباری)
-              </sapn>
+              </span>
               <select className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm ">
                 <option selected disabled value="" className="">
                   استاد راهنما
@@ -152,9 +152,9 @@ const Profile = () => {
               </select>
             </div>
             <div className="flex flex-col">
-              <sapn className="sm:text-base self-start font-medium text-sm">
+              <span className="sm:text-base self-start font-medium text-sm">
                 ترم{" "}
-              </sapn>
+              </span>
               <input
                 value={information[0].term}
                 className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
@@ -164,9 +164,9 @@ const Profile = () => {
               />
             </div>
             <div className="md:col-span-2 flex flex-col">
-              <sapn className="sm:text-base self-start font-medium text-sm">
+              <span className="sm:text-base self-start font-medium text-sm">
                 ایمیل{" "}
-              </sapn>
+              </span>
               <input
                 value={information[0].Email}
                 className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
