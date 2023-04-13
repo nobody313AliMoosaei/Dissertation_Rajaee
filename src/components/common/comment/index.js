@@ -1,12 +1,12 @@
 import React from "react";
 
 //SVG
-import { ReactComponent as Reply } from "./../../../assets/svg/reply.svg";
+import { ReactComponent as Reply } from "./../../../assets/svg/undo.svg";
 
 //PNG
 import Ellipse from "./../../../assets/image/Ellipse 1.png";
 
-const Comment = ({ styl, name, role, date, time, text }) => {
+const Comment = ({ styl, name, role, date, time, text, link }) => {
   return (
     <div className={`mt-5 ${styl}`}>
       <div className="border-2 p-2 border-[#EAECEF] rounded-md">
@@ -24,9 +24,15 @@ const Comment = ({ styl, name, role, date, time, text }) => {
               </div>
             </div>
           </div>
-          <div className="flex items-center bg-[#EBEEF2] text-[#475466] rounded-md py-1 px-3 gap-1 text ">
-            <Reply />
-            <span>پاسخ</span>
+          <div className="bg-[#EBEEF2] text-[#475466] rounded-md py-1 px-3 gap-1 text ">
+            <a
+              className="flex items-center flex-row-reverse"
+              onClick={link}
+              href="#sendcomment"
+            >
+              <Reply />
+              <span>پاسخ</span>
+            </a>
           </div>
         </div>
         <div className="my-7 sm:mx-5 mx-2 text-sm md:text-md">

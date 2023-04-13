@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-
 // import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 //SVG
 import { ReactComponent as Hamburger } from "../../../../assets/svg/hamburger.svg";
 import { ReactComponent as CloseCircle } from "../../../../assets/svg/closeCircle.svg";
@@ -13,22 +14,9 @@ import { ReactComponent as Profile } from "../../../../assets/svg/profile-circle
 
 //PNG
 import Logo from "../../../../assets/image/logo.png";
-import { Link } from "react-router-dom";
 const Meno = () => {
   const [isOpenNavbar, setIsOpenNavbar] = useState(false);
   const [isOpenmodalExit, setIsOpenmodalExit] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState();
-
-  useEffect(() => {
-    window.addEventListener("scroll", listenToScroll);
-  }, []);
-
-  const listenToScroll = () => {
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
-
-    setScrollPosition(winScroll);
-  };
 
   const toggleNavbarStatusHandler = () => {
     setIsOpenNavbar(!isOpenNavbar);
@@ -36,12 +24,7 @@ const Meno = () => {
   const toggleModslStatusHandler = () => {
     setIsOpenmodalExit(!isOpenmodalExit);
   };
-  // const refreshPage = () => {
-  //   setTimeout(() => {
-  //     window.location.reload(false);
-  //   }, 50);
-  //   console.log("page to reload");
-  // };
+
   const clickHandler = (e) => {};
   const [params, setParams] = useState(window.location.pathname);
 
@@ -53,11 +36,7 @@ const Meno = () => {
   }, []);
   return (
     <div
-      className={`${
-        scrollPosition > 200
-          ? "fixed z-50 top-0 right-0 w-full rounded-none px-5 py-1"
-          : "top-0 left-0 right-0  w-full rounded-none px-10 md:px-0 "
-      }   bg-[#fff] shadow-[0_2px_7px_0px_rgba(6,23,48,0.1)] lg:w-3/12 md:w-4/12 md:h-[100vh]`}
+      className={`${"top-0 left-0 right-0  w-full rounded-none px-10 md:px-0 "}   bg-[#fff] shadow-[0_2px_7px_0px_rgba(6,23,48,0.1)] lg:w-3/12 md:w-4/12 md:h-[100vh]`}
     >
       <div
         className={`w-[100vw] h-[100vh] bg-[#504f4f99] absolute text-center flex justify-center items-center ${
@@ -102,7 +81,6 @@ const Meno = () => {
           <span className="flex focus:bg-white  items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
             <Forms />
             فرم های اولیه
-            {/* <ArrowDown className="w-5" /> */}
           </span>
           <Link
             className={`${
@@ -115,7 +93,6 @@ const Meno = () => {
             <span className="flex items-center gap-x-2 duration-150 hover:cursor-pointer">
               <Writerinformation className="" />
               پیش ثبت نام
-              {/* <ArrowDown className="w-5" /> */}
             </span>{" "}
           </Link>
           <Link
@@ -129,7 +106,6 @@ const Meno = () => {
             <span className="flex items-center gap-x-2 duration-150 hover:cursor-pointer">
               <Condition />
               وضعیت پایان‌نامه
-              {/* <ArrowDown className="w-5" /> */}
             </span>
           </Link>
           <Link
@@ -153,19 +129,6 @@ const Meno = () => {
             خروج
           </span>
         </div>
-        {/* <div className="flex justify-left items-center gap-x-7 xl:gap-x-10 py-3 text-[#52575C]">
-          {/* <button
-            onClick={toggleNavbarStatusHandler}
-            className="block lg:hidden  rounded-lg"
-          >
-            <Hamburger />
-          </button> *
-          <div onClick={refreshPage} to={"/auth"}>
-            <button className="w-48 font-medium text-sm hidden md:block bg-[#003B7E] border-2 border-[#003B7E] hover:bg-white hover:text-[#003B7E] duration-200 text-white py-3 px-4 rounded-lg">
-              ورود
-            </button>
-          </div>
-        </div> */}
 
         {/* mobile view Navbar */}
         <div
@@ -182,13 +145,6 @@ const Meno = () => {
               <button onClick={toggleNavbarStatusHandler} className="self-end">
                 <CloseCircle />
               </button>
-              {/* <Link
-                    className="w-16 h-16 md:w-24 md:h-24"
-                    onClick={toggleNavbarStatusHandler}
-                    to={"/"}
-                  >
-                    <img src={Logo} alt="mahak" />
-                  </Link> */}
               <div className="self-start text-[#003B7E] flex flex-col items-start gap-y-10 my-10">
                 <span
                   onClick={clickHandler}
@@ -196,7 +152,6 @@ const Meno = () => {
                 >
                   <Forms />
                   فرم های اولیه
-                  {/* <ArrowDown className="w-5" /> */}
                 </span>
                 <Link
                   to={"preregistration"}
@@ -209,7 +164,6 @@ const Meno = () => {
                   <span className="flex items-center gap-x-2 duration-150 hover:cursor-pointer">
                     <Writerinformation />
                     پیش ثبت نام
-                    {/* <ArrowDown className="w-5" /> */}
                   </span>{" "}
                 </Link>
                 <Link
@@ -223,7 +177,6 @@ const Meno = () => {
                   <span className="flex items-center gap-x-2  duration-150 hover:cursor-pointer">
                     <Condition />
                     وضعیت پایان‌نامه
-                    {/* <ArrowDown className="w-5" /> */}
                   </span>
                 </Link>
                 <Link
@@ -248,13 +201,6 @@ const Meno = () => {
                   خروج
                 </span>
               </div>
-              {/* <div
-                onClick={refreshPage}
-                to={"/auth"}
-                className="block md:hidden font-medium text-sm w-full text-center bg-[#003B7E] border-2 border-[#003B7E] hover:bg-white hover:text-[#003B7E] duration-200 text-white py-3 px-4 rounded"
-              >
-                ورود
-              </div> */}
             </div>
           </div>
         </div>

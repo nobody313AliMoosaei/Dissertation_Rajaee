@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 //SVG
 import { ReactComponent as Backward } from "../../../../assets/svg/backward.svg";
 import { ReactComponent as Coment } from "../../../../assets/svg/coment.svg";
@@ -54,6 +55,18 @@ const ThesisDetails = ({ check }) => {
       reply: [],
     },
   ];
+  // const ref = useRef(null);
+  // useEffect(() => {
+  //   link();
+  // }, []);
+  const link = () => {
+    // ref.current.focus();
+    // console.log("first");
+  };
+  // // const link = () => {
+  // //   document.getElementById("inputComment").focus();
+  // //   console.log("two");
+  // // };
   return (
     <div className="container mx-auto w-10/12">
       <div className="flex items-center justify-between">
@@ -184,7 +197,7 @@ const ThesisDetails = ({ check }) => {
           </button>
         </div>
       </div>
-      <div className="bg-[#FFF] my-14 p-3 sm:p-7 rounded-md shadow-md ">
+      <div className="bg-[#FFF] max-h-[70rem] overflow-scroll my-14 p-3 sm:p-7 rounded-md shadow-md ">
         <div className="flex flex-row border-b-2  p-2  border-[#B0B9BE]">
           <Coment className="text-[#B0B9BE] text-xl ml-2" />
           <span className="text-[#000]">نظرات</span>
@@ -192,7 +205,7 @@ const ThesisDetails = ({ check }) => {
 
         {commentData.length === 0 ? (
           <span className="md:text-xl text-md text-center flex self-center justify-center text-[#475466] mt-5">
-            هیچ دیدگاهی برای این خبر ثبت نشده است. شما اولین نفر باشید!.
+            هیچ نظری وجود ندارد!
           </span>
         ) : (
           commentData.map((comment, index) => (
@@ -213,6 +226,7 @@ const ThesisDetails = ({ check }) => {
                   date={comment.date}
                   time={comment.time}
                   text={comment.text}
+                  link={link}
                 />
                 {comment.reply.length === 0 ? (
                   <></>
@@ -227,6 +241,7 @@ const ThesisDetails = ({ check }) => {
                       date={reply.date}
                       time={reply.time}
                       text={reply.text}
+                      link={link}
                     />
                   ))
                 )}
@@ -235,7 +250,10 @@ const ThesisDetails = ({ check }) => {
           ))
         )}
       </div>
-      <div className="bg-[#FFF] py-5 px-4 md:px-20 rounded-md shadow-md ">
+      <div
+        id="sendcomment"
+        className="bg-[#FFF] py-5 px-4 md:px-20 rounded-md shadow-md "
+      >
         <div className="flex justify-center flex-col items-center">
           <span className="border-b-2 border-[#3B5DE7] w-full text-center py-2 mb-2 ">
             ارسال نظر
@@ -244,9 +262,11 @@ const ThesisDetails = ({ check }) => {
         </div>
         <div className="flex flex-col items-center my-3 gap-5 py-3 px-5 w-full">
           <textarea
+            id="inputComment"
+            // ref={ref}
             rows="10"
             placeholder="نظر شما..."
-            className="border-2 border-[#B0B9BE]  rounded-md w-full"
+            className="border-2 p-2 border-[#B0B9BE]  rounded-md w-full"
           />
           {/* <div className="flex flex-col gap-8 lg:gap-24 lg:flex-row w-full">
             <input

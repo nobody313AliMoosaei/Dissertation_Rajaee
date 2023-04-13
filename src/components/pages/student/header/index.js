@@ -59,7 +59,7 @@ const Header = () => {
       </div>
       <div className="flex flex-row gap-4">
         <sapn>
-          سلام ،<span className="px-2">نام کاربر</span>عزیز خوش اومدی&#128075;
+          سلام ،<span className="px-2"> کاربر عزیز</span>عزیز خوش آمدی&#128075;
         </sapn>
         <span className="font-bold text-lg">|</span>
         <div className="flex gap-4 ">

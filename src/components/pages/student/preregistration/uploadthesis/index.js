@@ -1,7 +1,20 @@
+import { useState } from "react";
 // SVG
 import { ReactComponent as Backward } from "../../../../../assets/svg/backward.svg";
+import { ReactComponent as Trash } from "../../../../../assets/svg/close.svg";
 
 const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
+  const [dissertationFile, setDissertationFile] = useState();
+  const [proceedingsFile, setProceedingsFile] = useState();
+  const changeHandler = (e) => {
+    if (e.target.id === "thesis") {
+      setDissertationFile(e.target.files[0]);
+    } else {
+      setProceedingsFile(e.target.files[0]);
+      // console.log("Proceedings");
+    }
+  };
+
   return (
     <div className="bg-[#fff] mt-10 p-5 rounded-md">
       <div className="flex flex-col">
@@ -22,12 +35,40 @@ const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
             >
               انتخاب پایان‌نامه:
             </label>
-            <input
-              className="text-sm text-grey-500 file:mr-5 file:py-2 file:px-5 file:rounded-lg file:border-0 file:text-md  file:text-white file:bg-gradient-to-r file:bg-[#003B7E]  hover:file:cursor-pointer hover:file:opacity-80"
-              id="thesis"
-              type="file"
-              accept=".rar , .zip"
-            />
+            {dissertationFile ? (
+              <div className="flex items-center p-3 gap-6 w-full h-24 border-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 ">
+                <div
+                  onClick={() => setDissertationFile("")}
+                  className="flex items-center gap-1 stroke-white text-white bg-[#003B7E] px-2 py-1 rounded-md "
+                >
+                  <Trash />
+                  <span>حذف</span>
+                </div>
+                <span>{dissertationFile.name}</span>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center w-full">
+                <label
+                  for="thesis"
+                  className="flex flex-col items-center justify-center w-full h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                >
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="font-medium text-sm text-grey-500 mr-5 py-2 px-5 rounded-lg border-0 text-md  text-white bg-gradient-to-r bg-[#003B7E]  hover:cursor-pointer hover:opacity-80 ">
+                        انتخاب فایل
+                      </span>
+                    </p>
+                  </div>
+                  <input
+                    onChange={(e) => changeHandler(e)}
+                    id="thesis"
+                    accept=".rar , .zip"
+                    type="file"
+                    className="hidden"
+                  />
+                </label>
+              </div>
+            )}
           </div>
           <div className="flex flex-col">
             <label
@@ -36,12 +77,40 @@ const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
             >
               انتخاب صورت جلسه:
             </label>
-            <input
-              accept=""
-              className=" text-sm text-grey-500 file:mr-5 file:py-2 file:px-5 file:rounded-lg file:border-0 file:text-md  file:text-white file:bg-gradient-to-r file:bg-[#003B7E]  hover:file:cursor-pointer hover:file:opacity-80"
-              id="Proceedings"
-              type="file"
-            />
+            {proceedingsFile ? (
+              <div className="flex items-center p-3 gap-6 w-full h-24 border-2 border-gray-300 rounded-lg cursor-pointer bg-gray-50 ">
+                <div
+                  onClick={() => setProceedingsFile("")}
+                  className="flex items-center gap-1 stroke-white text-white bg-[#003B7E] px-2 py-1 rounded-md "
+                >
+                  <Trash />
+                  <span>حذف</span>
+                </div>
+                <span>{proceedingsFile.name}</span>
+              </div>
+            ) : (
+              <div className="flex items-center justify-center w-full">
+                <label
+                  for="Proceedings"
+                  className="flex flex-col items-center justify-center w-full h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                >
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                      <span className="font-medium text-sm text-grey-500 mr-5 py-2 px-5 rounded-lg border-0 text-md  text-white bg-gradient-to-r bg-[#003B7E]  hover:cursor-pointer hover:opacity-80 ">
+                        انتخاب فایل
+                      </span>
+                    </p>
+                  </div>
+                  <input
+                    id="Proceedings"
+                    accept=".rar , .zip"
+                    type="file"
+                    className="hidden"
+                    onChange={(e) => changeHandler(e)}
+                  />
+                </label>
+              </div>
+            )}
           </div>
         </div>
         <div className="flex flex-row-reverse justify-between">

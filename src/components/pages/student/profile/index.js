@@ -82,11 +82,11 @@ const Profile = () => {
           isOpenmodalEdit ? "" : "hidden"
         } `}
       >
-        <div className="bg-[#fff] flex flex-col items-start  p-8 gap-0 rounded-md">
+        <div className="bg-[#fff] w-[40rem] flex flex-col items-center p-8 gap-0 rounded-md">
           <div className="mb-3 text-[#003B7E] font-medium">
             <span>اطلاعات دانشجو</span>
           </div>
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:gap-x-8 gap-x-2 gap-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-x-8 gap-x-2 md:gap-y-6 gap-y-2 w-full">
             <div className="flex flex-col">
               <sapn className="sm:text-base self-start font-medium text-sm">
                 نام{" "}
@@ -126,8 +126,8 @@ const Profile = () => {
             <div className="flex flex-col">
               <sapn className="sm:text-base font-medium text-sm">دانشکده</sapn>
               <select className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm ">
-                <option disabled={true} value="" className="">
-                  دانشکده مورد نظر خود را انتخاب کنید
+                <option selected disabled={true} value="" className="">
+                  دانشکده
                 </option>
                 {options.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -141,8 +141,8 @@ const Profile = () => {
                 استاد راهنما (اجباری)
               </sapn>
               <select className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm ">
-                <option disabled value="" className="">
-                  استاد راهنما مورد نظر خود را انتخاب کنید
+                <option selected disabled value="" className="">
+                  استاد راهنما
                 </option>
                 {options.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -163,7 +163,7 @@ const Profile = () => {
                 required
               />
             </div>
-            <div className="col-span-2 flex flex-col">
+            <div className="md:col-span-2 flex flex-col">
               <sapn className="sm:text-base self-start font-medium text-sm">
                 ایمیل{" "}
               </sapn>

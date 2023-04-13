@@ -67,7 +67,7 @@ const Information = () => {
     }
   };
   return (
-    <div className="w-10/12 flex flex-col items-center justify-center md:my-7">
+    <div className="md:w-10/12  flex flex-col items-center justify-center md:my-7">
       <div className="flex flex-col justify-center items-center">
         <span className="lg:text-4xl md::text-2xl text-xl text-center font-bold">
           سامانه ثبت پایان نامه دانشگاه تربیت دبیر شهید رجایی

@@ -14,7 +14,7 @@ const Student = () => {
       <Meno />
       <div className="md:w-3/4 w-full flex flex-col">
         <Header />
-        <div className="flex justify-center p-5 items-center">
+        <div className="flex justify-center items-center">
           {/* <PreRegistration /> */}
           {/* <ThesisStatus /> */}
           <Routes>

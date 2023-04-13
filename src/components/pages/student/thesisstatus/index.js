@@ -1,7 +1,7 @@
 const ThesisStatus = () => {
   return (
-    <div>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+    <div className="flex sm:px-8 py-4 w-full">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-1">
         <div className="">
           <span
             id="1"

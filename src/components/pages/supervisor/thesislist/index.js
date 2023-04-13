@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import { ReactComponent as Search } from "../../../../assets/svg/search-normal.svg";
 
 //Components
+import Loding from "../../../common/loding";
 import SingleList from "./singlelist";
+import Pagination from "../../../common/pagination";
 
 const ThesisList = ({ check }) => {
   const [searchStudentNumber, setSearchStudentNumber] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
+  const [indexList, setIndexList] = useState(1);
 
   // useEffect(() => {
   //   console.log(searchStudentNumber);
@@ -47,11 +50,32 @@ const ThesisList = ({ check }) => {
       number: "3981231093",
       title: " پایان‌نامه",
     },
+    {
+      id: "5",
+      name: "علی",
+      family: "محجوب",
+      number: "3981231093",
+      title: " پایان‌نامه",
+    },
+    {
+      id: "6",
+      name: "علی",
+      family: "محجوب",
+      number: "3981231093",
+      title: " پایان‌نامه",
+    },
+    {
+      id: "7",
+      name: "علی",
+      family: "محجوب",
+      number: "3981231093",
+      title: " پایان‌نامه",
+    },
   ];
   return (
     <div className="container mx-auto w-10/12">
       <div className="flex items-center justify-between">
-        <div className="my-14 flex gap-2 text-lg">
+        <div className="sm:my-14 my-8  flex gap-2 text-lg">
           <span>داشبورد</span>
           <span>/</span>
           <span>پایان‌نامه ها</span>
@@ -92,7 +116,7 @@ const ThesisList = ({ check }) => {
           </button>
         </div>
       </div>
-      <div className="bg-white p-4 my-5 rounded-md">
+      <div className="bg-white min-h-[19rem] p-4 my-5 rounded-md">
         <div className="grid md:grid-cols-7 sm:grid-cols-6 grid-cols-5 font-medium bg-[#F8F9FA]  p-3 rounded-sm">
           <span className="col-span-1">#</span>
           <span className="hidden lg:block">نام</span>
@@ -101,20 +125,30 @@ const ThesisList = ({ check }) => {
           <span className="hidden sm:block sm:col-span-2">عنوان</span>
         </div>
         {Array.isArray(thesis) &&
-          thesis.map((item, index) => (
-            <div>
-              <SingleList
-                check={check}
-                key={index}
-                id={item.id}
-                name={item.name}
-                family={item.family}
-                number={item.number}
-                title={item.title}
-              />
-            </div>
-          ))}
+          thesis.map((item, index) =>
+            index >= (indexList - 1) * 4 && index < indexList * 4 ? (
+              <div>
+                <SingleList
+                  check={check}
+                  key={index}
+                  id={item.id}
+                  name={item.name}
+                  family={item.family}
+                  number={item.number}
+                  title={item.title}
+                />
+              </div>
+            ) : (
+              <></>
+            )
+          )}
       </div>
+      <Pagination
+        count={thesis.length}
+        setIndexList={setIndexList}
+        pageNumber={indexList}
+      />
+      {/* <Loding /> */}
     </div>
   );
 };

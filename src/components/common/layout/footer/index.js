@@ -2,11 +2,10 @@
 import { ReactComponent as Location } from "./../../../../assets/svg/location.svg";
 import { ReactComponent as Phone } from "./../../../../assets/svg/phone.svg";
 import { ReactComponent as Email } from "./../../../../assets/svg/message.svg";
-import { ReactComponent as Time } from "./../../../../assets/svg/time.svg";
 
 const Footer = () => {
   return (
-    <div className=" text-right flex flex-col  mt-10 sm:mx-0 bg-[#003B7E] ">
+    <div className="text-right flex flex-col  mt-10 sm:mx-0 bg-[#003B7E] ">
       <div className="grid text-[#fff] md:grid-cols-3 gap-8 grid-cols-1 lg:flex-row lg:mr-0 px-20">
         <div className=" md:col-span-1 text-center pt-10 lg:pt-5 lg:pr-10 lg:text-right ">
           <span className="font-bold text-base md:text-lg lg:text-xl">
@@ -45,10 +44,12 @@ const Footer = () => {
               </a>
             </li>
             <li className="py-1">
-              <a href="">سامانه گلستان</a>
+              <a href="https://portal.sru.ac.ir/">سامانه گلستان</a>
             </li>
             <li className="py-1">
-              <a href="">سایت دانشگاه تربیت دبیر شهید رجایی</a>
+              <a href="https://www.sru.ac.ir/">
+                سایت دانشگاه تربیت دبیر شهید رجایی
+              </a>
             </li>
           </ul>
         </div>
