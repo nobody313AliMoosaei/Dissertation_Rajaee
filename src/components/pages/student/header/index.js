@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <div className="hidden md:flex bg-[#fff] h-20 px-10  justify-between items-center">
       <div
-        className={`z-20 w-[100vw] h-[100vh] bg-[#504f4f99] top-0 right-0 absolute text-center flex justify-center items-center ${
+        className={`z-20 w-[100vw] h-[100vh] bg-[#504f4f99] top-0 right-0 fixed text-center flex justify-center items-center ${
           isOpenmodalExit ? "flex" : "hidden"
         }`}
       >

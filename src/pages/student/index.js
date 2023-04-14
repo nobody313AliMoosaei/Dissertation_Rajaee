@@ -9,7 +9,7 @@ import Profile from "../../components/pages/student/profile";
 
 const Student = () => {
   return (
-    <div className="md:flex h-[100vh] bg-[#F5F6FA]">
+    <div className="md:flex h-full min-h-screen bg-[#F5F6FA]">
       {/* <Home /> */}
       <Meno />
       <div className="md:w-3/4 w-full flex flex-col">

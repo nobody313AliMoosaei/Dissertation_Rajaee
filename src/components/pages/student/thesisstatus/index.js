@@ -1,7 +1,7 @@
 const ThesisStatus = () => {
   return (
-    <div className="flex sm:px-8 py-4 w-full">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-1">
+    <div className="flex flex-col gap-8 sm:px-8 py-4 w-full">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-1 px-2">
         <div className="">
           <span
             id="1"
@@ -40,10 +40,47 @@ const ThesisStatus = () => {
           <span className={``}> تایید کارشناس امور پایان‌نامه</span>
         </div>
       </div>
-      <div>
-        <div>
-          <span></span>
-          <span></span>
+      <div className="flex flex-col self-center gap-5 my-5 sm:w-3/4 w-full px-2 ">
+        <div className="flex flex-col bg-white text-center py-6 rounded-md shadow-md px-2">
+          <span className="text-[#037724] text-lg font-medium">
+            پایان‌نامه شما با موفقیت ثبت شد.
+          </span>
+          <span className="text-yellow-400 text-lg font-medium">
+            پایان‌نامه خود را آپلود نکرده اید.
+          </span>
+        </div>
+        <div className="flex flex-col bg-white text-center py-6 rounded-md shadow-md px-2">
+          <span className="text-[#037724] text-lg font-medium">
+            پایان‌نامه شما توسط استاد راهنما تایید شد.
+          </span>
+          <span className="text-yellow-400 text-lg font-medium">
+            پایان‌نامه شما توسط استاد راهنما رد شد. پایان‌نامه را اصلاح مجدد
+            ارسال کنید.
+          </span>
+        </div>
+        <div className="flex flex-col bg-white text-center py-6 rounded-md shadow-md px-2">
+          <span className="text-[#037724] text-lg font-medium">
+            پایان‌نامه شما توسط کارشناس آموزش تایید شد.
+          </span>
+          <span className="text-yellow-400 text-lg font-medium">
+            پایان‌نامه شما توسط کارشناس آموزش رد شد.
+          </span>
+        </div>
+        <div className="flex flex-col bg-white text-center py-6 rounded-md shadow-md px-2">
+          <span className="text-[#037724] text-lg font-medium">
+            پایان‌نامه شما توسط کارشناس تحصیلات تکمیلی تایید شد.
+          </span>
+          <span className="text-yellow-400 text-lg font-medium">
+            پایان‌نامه شما توسط کارشناس تحصیلات تکمیلی رد شد.
+          </span>
+        </div>
+        <div className="flex flex-col bg-white text-center py-6 rounded-md shadow-md px-2">
+          <span className="text-[#037724] text-lg font-medium">
+            پایان‌نامه شما توسط کارشناس امور پایان‌نامه تایید شد.
+          </span>
+          <span className="text-yellow-400 text-lg font-medium">
+            پایان‌نامه شما توسط کارشناس امور پایان‌نامه تایید رد شد.
+          </span>
         </div>
       </div>
     </div>

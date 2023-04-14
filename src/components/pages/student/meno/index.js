@@ -36,10 +36,10 @@ const Meno = () => {
   }, []);
   return (
     <div
-      className={`${"top-0 left-0 right-0  w-full rounded-none px-10 md:px-0 "}   bg-[#fff] shadow-[0_2px_7px_0px_rgba(6,23,48,0.1)] lg:w-3/12 md:w-4/12 md:h-[100vh]`}
+      className={`${"top-0 left-0 right-0  w-full rounded-none px-10 md:px-0 "}   bg-[#fff] shadow-[0_2px_7px_0px_rgba(6,23,48,0.1)] lg:w-3/12 md:w-4/12 md:h-screen `}
     >
       <div
-        className={`w-[100vw] h-[100vh] bg-[#504f4f99] absolute text-center flex justify-center items-center ${
+        className={`w-[100vw] h-full fixed bg-[#504f4f99] text-center flex justify-center items-center ${
           isOpenmodalExit ? "flex" : "hidden"
         }`}
       >
@@ -62,7 +62,7 @@ const Meno = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-between container mx-auto ">
+      <div className="flex flex-col justify-between container mx-auto">
         <div className="flex flex-row justify-between  w-full h-20 mb-3">
           <div className="flex justify-center pr-4 items-center font-medium">
             <img src={Logo} alt="LOGo" />
