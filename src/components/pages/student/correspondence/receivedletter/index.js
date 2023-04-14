@@ -65,7 +65,7 @@ const ReceivedLetter = ({ status }) => {
             <span className="col-span-3">عنوان</span>
             <span className="col-span-4">متن</span>
           </div>
-          <div className="max-h-64 flex flex-col gap-3 overflow-y-scroll ">
+          <div className="max-h-64 scrollbar-thin scrollbar-thumb-blue-700 scrollbar-track-blue-300 flex flex-col gap-3 overflow-y-scroll ">
             {letter.map((item, index) => (
               <ListLetter
                 key={index}

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 //SVG
 import { ReactComponent as Profile } from "../../../../assets/svg/profile-circle.svg";
+import { ReactComponent as ArrowDown } from "../../../../assets/svg/arrow-down.svg";
 
 const Header = () => {
   const [openProfile, setOpenprofile] = useState(false);
@@ -62,10 +63,18 @@ const Header = () => {
           <span className="">{today}</span>
         </div>
       </div>
-      <div className="z-10 flex justify-center items-center gap-6 flex-row-reverse">
-        <Profile className="cursor-pointer" onClick={toggleOpenProfile} />
+      <div
+        onClick={toggleOpenProfile}
+        className="z-10 flex justify-center items-center gap-1 flex-row-reverse"
+      >
+        <ArrowDown
+          className={`h-4 w-4 cursor-pointer ${
+            openProfile ? "rotate-180 duration-300" : "duration-300"
+          }`}
+        />
+        <Profile className="cursor-pointer" />
         <div
-          className={`absolute flex flex-col top-[5.4rem] to bg-[#fff] p-2 gap-3 ${
+          className={`absolute flex flex-col top-[5.4rem] left-5 shadow-lg rounded-md to bg-[#fff] p-2 gap-3 ${
             openProfile ? "" : "hidden"
           }`}
         >

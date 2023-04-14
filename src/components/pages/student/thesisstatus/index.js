@@ -40,6 +40,12 @@ const ThesisStatus = () => {
           <span className={``}> تایید کارشناس امور پایان‌نامه</span>
         </div>
       </div>
+      <div>
+        <div>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
     </div>
   );
 };

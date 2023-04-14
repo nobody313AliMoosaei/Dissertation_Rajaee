@@ -1,3 +1,4 @@
+import ReCAPTCHA from "react-google-recaptcha";
 import { Link, Outlet } from "react-router-dom";
 
 const Login = () => {
@@ -26,6 +27,7 @@ const Login = () => {
               type={"text"}
             />
           </div>
+          <ReCAPTCHA sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" />
           <button className="bg-[#003B7E] w-full sm:p-4 p-2 mt-6 rounded-md text-lg text-[#ffffff]">
             ورود به سامانه
           </button>

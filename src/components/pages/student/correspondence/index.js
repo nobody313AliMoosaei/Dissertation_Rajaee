@@ -9,7 +9,7 @@ const Correspondence = () => {
       <div className="flex flex-col sm:flex-row px-4 w-fit py-3 bg-[#fff] gap-6 rounded-md">
         <span
           onClick={() => setPage(1)}
-          className={`px-4 py-2  rounded-md ${
+          className={`px-4 cursor-pointer py-2  rounded-md ${
             page === 1 ? "text-white bg-[#003B7E]" : ""
           }`}
         >
@@ -17,7 +17,7 @@ const Correspondence = () => {
         </span>
         <span
           onClick={() => setPage(2)}
-          className={`px-4 py-2  rounded-md ${
+          className={`px-4 cursor-pointer py-2  rounded-md ${
             page === 2 ? "text-white bg-[#003B7E]" : ""
           }`}
         >
@@ -25,7 +25,7 @@ const Correspondence = () => {
         </span>
         <span
           onClick={() => setPage(3)}
-          className={`px-4 py-2  rounded-md ${
+          className={`px-4 cursor-pointer py-2  rounded-md ${
             page === 3 ? "text-white bg-[#003B7E]" : ""
           }`}
         >
