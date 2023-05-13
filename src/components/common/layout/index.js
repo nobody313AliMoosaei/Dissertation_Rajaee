@@ -10,7 +10,7 @@ import Footer from "./footer";
 const Layout = () => {
   return (
     <div className="flex flex-col bg-[#F5F6FA]  mx-auto ">
-      <div className="sm:px-10 relative mb-40 z-10">
+      <div className="">
         <Header />
       </div>
       <Outlet />

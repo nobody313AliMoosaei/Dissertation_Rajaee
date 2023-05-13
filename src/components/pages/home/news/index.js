@@ -41,13 +41,13 @@ const News = () => {
   ];
 
   return (
-    <div className="">
+    <div className="block">
       <div className="my-8 text-center">
         <span className="text-xl font-bold border-b-2 border-b-slate-900  ">
           اخرین اخبار
         </span>
       </div>
-      <div className="w-screen flex flex-row gap-4 justify-center items-center">
+      <div className="w-[98vw] flex flex-row justify-center items-center">
         <div className="md:w-3/4 w-full self-center">
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -74,15 +74,13 @@ const News = () => {
           >
             {Array.isArray(newsList) &&
               newsList.map((item, index) => (
-                <div>
-                  <SwiperSlide key={index}>
-                    <SingleNews
-                      title={item.title}
-                      date={item.date}
-                      text={item.text}
-                    />
-                  </SwiperSlide>
-                </div>
+                <SwiperSlide key={index}>
+                  <SingleNews
+                    title={item.title}
+                    date={item.date}
+                    text={item.text}
+                  />
+                </SwiperSlide>
               ))}
           </Swiper>
         </div>

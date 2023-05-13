@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.toast-message {
+  font-family: "Vazir";
+  font-weight: 600;
+}

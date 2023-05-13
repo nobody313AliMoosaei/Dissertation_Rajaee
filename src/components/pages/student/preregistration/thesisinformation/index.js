@@ -1,5 +1,8 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+//toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../../../../../App.css";
 // SVG
 import { ReactComponent as Backward } from "../../../../../assets/svg/backward.svg";
 import { ReactComponent as Add } from "../../../../../assets/svg/add.svg";
@@ -10,6 +13,7 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
   const [listEnglishVocabulary, setListEnglishVocabulary] = useState([]);
   const [persianVocabulary, setPersianVocabulary] = useState();
   const [listPersianVocabulary, setListPersianVocabulary] = useState([]);
+  const [thesisInformation, setThesisInformation] = useState({});
   const addCliclHandler = (name) => {
     if (
       englishVocabulary !== undefined &&
@@ -40,6 +44,7 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
     }
   };
   const deletHandler = (e, index, name) => {
+    console.log(index);
     if (name === "persian") {
       setListPersianVocabulary([
         ...listPersianVocabulary.slice(0, index),
@@ -51,6 +56,69 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
         ...listEnglishVocabulary.slice(0, index),
         ...listEnglishVocabulary.slice(index + 1),
       ]);
+    }
+  };
+
+  useEffect(() => {
+    const data = sessionStorage.getItem("thesisInformation");
+    const listEnglishVocabulary = sessionStorage.getItem(
+      "listEnglishVocabulary"
+    );
+    const listPersianVocabulary = sessionStorage.getItem(
+      "listPersianVocabulary"
+    );
+    if (data && Object.keys(data).length > 0) {
+      setThesisInformation({ ...JSON.parse(data) });
+    }
+    if (listEnglishVocabulary && listEnglishVocabulary.length > 0) {
+      setListEnglishVocabulary([...JSON.parse(listEnglishVocabulary)]);
+    }
+    if (listPersianVocabulary && listPersianVocabulary.length > 0) {
+      setListPersianVocabulary([...JSON.parse(listPersianVocabulary)]);
+    }
+  }, []);
+
+  const notify = () =>
+    toast.error("اطلاعات کامل وارد نشده است!!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  const updateData = (e) => {
+    setThesisInformation({
+      ...thesisInformation,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handelStoreInformation = () => {
+    if (
+      thesisInformation.persianTitle === "" ||
+      thesisInformation.englishTitle === "" ||
+      thesisInformation.abstract === "" ||
+      listPersianVocabulary.length === 0 ||
+      listEnglishVocabulary.length === 0 ||
+      Object.keys(thesisInformation).length === 0
+    ) {
+      notify();
+    } else {
+      sessionStorage.setItem(
+        "thesisInformation",
+        JSON.stringify(thesisInformation)
+      );
+      sessionStorage.setItem(
+        "listEnglishVocabulary",
+        JSON.stringify(listEnglishVocabulary)
+      );
+      sessionStorage.setItem(
+        "listPersianVocabulary",
+        JSON.stringify(listPersianVocabulary)
+      );
+      stepForwardHandler();
     }
   };
   return (
@@ -73,6 +141,9 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
             <input
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
               placeholder="عنوان پایان‌نامه را وارد کنید"
+              name="persianTitle"
+              onChange={updateData}
+              value={thesisInformation.persianTitle || ""}
               type={"text"}
             />
           </div>
@@ -83,6 +154,9 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
             <input
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
               placeholder="عنوان پایان‌نامه را وارد کنید"
+              name="englishTitle"
+              value={thesisInformation.englishTitle || ""}
+              onChange={updateData}
               type={"text"}
             />
           </div>
@@ -90,7 +164,9 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
             <span className="sm:text-base font-medium text-sm">چکیده</span>
             <textarea
               className="border-2  focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-20 resize-none h-16 p-1 sm:text-base text-sm "
-              name="postConteant"
+              name="abstract"
+              value={thesisInformation.abstract || ""}
+              onChange={updateData}
               rows={4}
             />
           </div>
@@ -99,7 +175,7 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
               <span className="sm:text-base font-medium text-sm">
                 واژگان(فارسی):{" "}
               </span>
-              <div className="flex">
+              <div className="flex gap-1">
                 <input
                   onChange={(event) => setPersianVocabulary(event.target.value)}
                   onKeyDown={(e) => handleKeyDown(e, "persian")}
@@ -108,7 +184,7 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
                 />
                 <div
                   onClick={() => addCliclHandler("persian")}
-                  className="flex p-1 rounded-md items-center bg-[#003B7E] text-white stroke-white"
+                  className="flex p-1 rounded-md items-center bg-[#003B7E] text-white stroke-white cursor-pointer"
                 >
                   <span>اضافه کردن</span>
                   <Add />
@@ -116,14 +192,17 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
               </div>
             </div>
             {listPersianVocabulary.length !== 0 ? (
-              <div className="flex flex-wrap gap-3 overflow-y-scroll h-full border-2 border-[#9B9B9B] rounded-md">
+              <div className="flex flex-wrap gap-4 overflow-y-scroll h-full border-2 border-[#9B9B9B] rounded-md">
                 {listPersianVocabulary.map((item, index) => (
-                  <div className="flex items-center text-[#000]">
+                  <div
+                    key={index}
+                    className="flex items-center gap-[2px] text-[#b62323]"
+                  >
                     <Close
                       onClick={(e) => deletHandler(e, index, "persian")}
-                      className="w-3 h-3"
+                      className="w-3 h-3 cursor-pointer"
                     />
-                    <span>{item}</span>
+                    <span className="text-[#000]">{item}</span>
                   </div>
                 ))}
               </div>
@@ -150,7 +229,7 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
                 />
                 <div
                   onClick={() => addCliclHandler("english")}
-                  className="flex p-1 rounded-md items-center bg-[#003B7E] text-white stroke-white"
+                  className="flex p-1 rounded-md items-center bg-[#003B7E] text-white stroke-white cursor-pointer"
                 >
                   <span>اضافه کردن</span>
                   <Add />
@@ -158,14 +237,17 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
               </div>
             </div>
             {listEnglishVocabulary.length !== 0 ? (
-              <div className="flex flex-wrap gap-3 overflow-y-scroll h-20 border-2 border-[#9B9B9B] rounded-md">
+              <div className="flex flex-wrap gap-4 overflow-y-scroll h-20 border-2 border-[#9B9B9B] rounded-md">
                 {listEnglishVocabulary.map((item, index) => (
-                  <div className="flex items-center text-[#000]">
+                  <div
+                    key={index}
+                    className="flex items-center gap-[2px] text-[#b62323]"
+                  >
                     <Close
                       onClick={(e) => deletHandler(e, index, "english")}
-                      className="w-3 h-3"
+                      className="w-3 h-3 cursor-pointer"
                     />
-                    <span>{item}</span>
+                    <span className="text-[#000]">{item}</span>
                   </div>
                 ))}
               </div>
@@ -176,12 +258,13 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
         </div>
         <div className="flex flex-row-reverse justify-between">
           <button
-            onClick={stepForwardHandler}
+            onClick={handelStoreInformation}
             className="bg-[#003b7e29] sm:px-4 self-end p-2 mt-4 rounded-md text-lg text-[#003B7E]"
           >
             مرحله بعدی
           </button>
         </div>
+        <ToastContainer bodyClassName="toast-message" />
       </div>
     </div>
   );

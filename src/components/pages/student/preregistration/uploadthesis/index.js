@@ -1,4 +1,9 @@
-import { useState } from "react";
+import { render } from "@testing-library/react";
+import { useState, useEffect } from "react";
+//toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../../../../../App.css";
 // SVG
 import { ReactComponent as Backward } from "../../../../../assets/svg/backward.svg";
 import { ReactComponent as Trash } from "../../../../../assets/svg/close.svg";
@@ -6,15 +11,60 @@ import { ReactComponent as Trash } from "../../../../../assets/svg/close.svg";
 const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
   const [dissertationFile, setDissertationFile] = useState();
   const [proceedingsFile, setProceedingsFile] = useState();
-  const changeHandler = (e) => {
-    if (e.target.id === "thesis") {
-      setDissertationFile(e.target.files[0]);
+  const [data, setData] = useState({});
+  const [thesisFile, setThesisFile] = useState({});
+
+  const changeHandler = (event) => {
+    if (event.target.id === "thesis") {
+      setDissertationFile(event.target.files[0]);
     } else {
-      setProceedingsFile(e.target.files[0]);
-      // console.log("Proceedings");
+      setProceedingsFile(event.target.files[0]);
     }
   };
+  useEffect(() => {
+    const personalInfo = sessionStorage.getItem("information");
+    const listPersianVocabulary = JSON.parse(
+      sessionStorage.getItem("listPersianVocabulary")
+    );
+    const listEnglishVocabulary = JSON.parse(
+      sessionStorage.getItem("listEnglishVocabulary")
+    );
+    const thesisInformation = sessionStorage.getItem("thesisInformation");
+    if (
+      personalInfo &&
+      listEnglishVocabulary &&
+      listPersianVocabulary &&
+      thesisInformation
+    ) {
+      setData({
+        ...JSON.parse(personalInfo),
+        ...JSON.parse(thesisInformation),
+        listEnglishVocabulary,
+        listPersianVocabulary,
+      });
+    }
+  }, []);
 
+  const notify = () =>
+    toast.error("اطلاعات کامل وارد نشده است!!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      // closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+  const handelStoreInformation = () => {
+    console.log(data);
+    if (!dissertationFile || !proceedingsFile) {
+      notify();
+    } else {
+      stepForwardHandler();
+    }
+  };
   return (
     <div className="bg-[#fff] mt-10 p-5 rounded-md">
       <div className="flex flex-col">
@@ -62,7 +112,7 @@ const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
                   <input
                     onChange={(e) => changeHandler(e)}
                     id="thesis"
-                    accept=".rar , .zip"
+                    accept=".rar , .zip , .pdf , .docx"
                     type="file"
                     className="hidden"
                   />
@@ -103,7 +153,7 @@ const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
                   </div>
                   <input
                     id="Proceedings"
-                    accept=".rar , .zip"
+                    accept=".jpg , .png , .jpeg"
                     type="file"
                     className="hidden"
                     onChange={(e) => changeHandler(e)}
@@ -115,11 +165,12 @@ const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
         </div>
         <div className="flex flex-row-reverse justify-between">
           <button
-            onClick={stepForwardHandler}
+            onClick={handelStoreInformation}
             className="bg-[#003b7e29] sm:px-4 self-end p-2 mt-6 rounded-md text-lg text-[#003B7E]"
           >
             ثبت نهایی
           </button>
+          <ToastContainer bodyClassName="toast-message" />
         </div>
       </div>
     </div>

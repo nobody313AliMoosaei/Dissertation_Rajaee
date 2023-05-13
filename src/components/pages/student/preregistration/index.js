@@ -1,4 +1,5 @@
 import { useState } from "react";
+import FinalRegistration from "./finalregistration";
 
 import PersonalInformation from "./personalinformation";
 import ThesisInformation from "./thesisinformation";
@@ -18,7 +19,7 @@ const PreRegistration = () => {
   return (
     <div className="flex justify-center bg-[#F5F6FA] h-full p-5 w-full">
       <div className="mt-10 mx-3 w-11/12">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-4">
           <div className="">
             <span
               id="1"

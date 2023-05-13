@@ -25,12 +25,12 @@ const Header = () => {
   const toggleNavbarStatusHandler = () => {
     setIsOpenNavbar(!isOpenNavbar);
   };
-  const refreshPage = () => {
-    setTimeout(() => {
-      window.location.reload(false);
-    }, 50);
-    console.log("page to reload");
-  };
+  // const refreshPage = () => {
+  //   setTimeout(() => {
+  //     window.location.reload(false);
+  //   }, 50);
+  //   console.log("page to reload");
+  // };
   return (
     <div
       className={`${
@@ -67,7 +67,10 @@ const Header = () => {
           >
             <Hamburger />
           </button>
-          <Link onClick={refreshPage} to={"/login"}>
+          <Link
+            // onClick={refreshPage}
+            to={"/login"}
+          >
             <button className="w-48 font-medium text-sm hidden xl:block bg-[#003B7E] border-2 border-[#003B7E] hover:bg-white hover:text-[#003B7E] duration-200 text-white py-3 px-4 rounded-lg">
               ورود / ثبت نام
             </button>
@@ -114,7 +117,7 @@ const Header = () => {
                 </span>
               </div>
               <Link
-                onClick={refreshPage}
+                // onClick={refreshPage}
                 to={"/login"}
                 className="block xl:hidden font-medium text-sm w-full text-center bg-[#003B7E] border-2 border-[#003B7E] hover:bg-white hover:text-[#003B7E] duration-200 text-white py-3 px-4 rounded"
               >

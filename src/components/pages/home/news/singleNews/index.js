@@ -7,9 +7,9 @@ import { ReactComponent as Calendar } from "../../../../../assets/svg/calendar.s
 const SingleNews = ({ title, date, text }) => {
   return (
     <div className="flex justify-center">
-      <div className="p-4 bg-[#fff] w-[22rem] flex items-center flex-col rounded-md">
-        <div className="w-full">
-          <img className="w-full h-[175px]" src={ImageNews} />
+      <div className="p-4 bg-[#fff] w-[22rem]  flex items-center flex-col rounded-md">
+        <div className="w-full h-[190px] bg-black rounded-sm  ">
+          <img className="w-full h-full" src={ImageNews} />
         </div>
         <div className="flex flex-col">
           <div className="flex justify-end my-2">

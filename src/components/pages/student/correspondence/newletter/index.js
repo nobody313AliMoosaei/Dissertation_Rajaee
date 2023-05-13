@@ -19,7 +19,7 @@ const Newletter = () => {
   ];
   return (
     <div
-      className={`flex flex-col gap-3 bg-white   rounded-md md:w-3/4 p-8 mt-10`}
+      className={`flex flex-col gap-3 bg-white rounded-md md:w-3/4 w-full sm:p-8 p-4 mt-10`}
     >
       <div className="flex flex-col w-fit gap-2 ">
         <span className="sm:text-base font-medium text-sm">گیرنده</span>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Link } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 //SVG
@@ -36,7 +35,7 @@ const Meno = () => {
   }, []);
   return (
     <div
-      className={`${"top-0 left-0 right-0  w-full rounded-none px-10 md:px-0 "}   bg-[#fff] shadow-[0_2px_7px_0px_rgba(6,23,48,0.1)] lg:w-3/12 md:w-4/12 md:h-screen `}
+      className={`${"top-0 left-0 right-0  w-full rounded-none px-10 md:px-0 "}   bg-[#fff] shadow-[0_2px_7px_0px_rgba(6,23,48,0.1)] lg:w-3/12 md:w-4/12  `}
     >
       <div
         className={`w-[100vw] h-full fixed bg-[#504f4f99] text-center flex justify-center items-center ${
@@ -48,7 +47,7 @@ const Meno = () => {
             آیا میخواهید از پنل کاربری خود خارج شوید؟
           </p>
           <div className="flex flex-row-reverse justify-between">
-            <Link to={"/"}>
+            <Link onClick={() => sessionStorage.clear()} to={"/"}>
               <button className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]">
                 خروج
               </button>
@@ -62,7 +61,7 @@ const Meno = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-between container mx-auto">
+      <div className="flex flex-col justify-between container mx-auto ">
         <div className="flex flex-row justify-between  w-full h-20 mb-3">
           <div className="flex justify-center pr-4 items-center font-medium">
             <img src={Logo} alt="LOGo" />
@@ -85,7 +84,7 @@ const Meno = () => {
           <Link
             className={`${
               params === "/student/preregistration"
-                ? "bg-[#003B7E] text-[#fff] w-fit p-2 px-4 rounded-md stroke-white"
+                ? "bg-[#003B7E] text-[#fff] w-fit p-2 px-4 rounded-md"
                 : "bg-inherit"
             }`}
             to={"preregistration"}
@@ -98,7 +97,7 @@ const Meno = () => {
           <Link
             className={`${
               params === "/student/thesisstatus"
-                ? "bg-[#003B7E] text-[#fff] w-fit p-2 px-4 rounded-md stroke-white"
+                ? "bg-[#003B7E] text-[#fff] w-fit p-2 px-4 rounded-md"
                 : "bg-inherit"
             }`}
             to={"thesisstatus"}
@@ -112,7 +111,7 @@ const Meno = () => {
             to={"correspondence"}
             className={`${
               params === "/student/correspondence"
-                ? "bg-[#003B7E] text-white w-fit p-2 px-4 rounded-md stroke-white"
+                ? "bg-[#003B7E] text-white w-fit p-2 px-4 rounded-md"
                 : "bg-inherit"
             }`}
           >

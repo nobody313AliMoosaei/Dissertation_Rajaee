@@ -11,11 +11,10 @@ const Home = () => {
   return (
     <div className="">
       <BackImage className="" />
-      <div className="relative w-full flex flex-col items-center justify-center">
+      <div className="relative flex flex-col items-center justify-center">
         <Information />
         <News />
         <Guide />
-        {/* <Thesis /> */}
       </div>
     </div>
   );

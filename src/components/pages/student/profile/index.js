@@ -36,46 +36,48 @@ const Profile = () => {
   ];
   return (
     <div>
-      <div className="bg-[#fff] flex flex-col justify-start mt-10 p-8 gap-0 rounded-md">
-        <div className="mb-3 text-[#003B7E] font-medium">
-          <span>اطلاعات دانشجو</span>
+      <div className="flex justify-center mt-10 gap-0 rounded-md">
+        <div className="w-11/12 bg-[#fff] p-8 flex flex-col justify-center ">
+          <div className="mb-3 text-[#003B7E] font-medium">
+            <span>اطلاعات دانشجو</span>
+          </div>
+          <div className="grid lg:grid-cols-3 lg:gap-y-8 lg:gap-x-3 md:grid-cols-2 gap-y-8 gap-x-6 sm:grid-cols-1 ">
+            <div>
+              <span className="font-medium">نام :</span>
+              <span>{information[0].name}</span>
+            </div>
+            <div>
+              <span className="font-medium">نام خانوادگی :</span>
+              <span>{information[0].family}</span>
+            </div>
+            <div>
+              <span className="font-medium">شماره دانشجویی :</span>
+              <span>{information[0].studentNumber}</span>
+            </div>
+            <div>
+              <span className="font-medium">دانشکده :</span>
+              <span>{information[0].college}</span>
+            </div>
+            <div>
+              <span className="font-medium">استاد راهنما :</span>
+              <span>{information[0].supervisor}</span>
+            </div>
+            <div>
+              <span className="font-medium">ترم :</span>
+              <span>{information[0].term}</span>
+            </div>
+            <div>
+              <span className="font-medium">ایمیل :</span>
+              <span>{information[0].Email}</span>
+            </div>
+          </div>
+          <button
+            onClick={toggleModslStatusHandler}
+            className="text-[#003B7E] bg-[#5e81d128] w-fit self-end px-3 py-1 mt-5 rounded-md"
+          >
+            ویرایش
+          </button>
         </div>
-        <div className="grid lg:grid-cols-3 lg:gap-y-8 lg:gap-x-3 md:grid-cols-2 gap-y-8 gap-x-6 sm:grid-cols-1 ">
-          <div>
-            <span className="font-medium">نام :</span>
-            <span>{information[0].name}</span>
-          </div>
-          <div>
-            <span className="font-medium">نام خانوادگی :</span>
-            <span>{information[0].family}</span>
-          </div>
-          <div>
-            <span className="font-medium">شماره دانشجویی :</span>
-            <span>{information[0].studentNumber}</span>
-          </div>
-          <div>
-            <span className="font-medium">دانشکده :</span>
-            <span>{information[0].college}</span>
-          </div>
-          <div>
-            <span className="font-medium">استاد راهنما :</span>
-            <span>{information[0].supervisor}</span>
-          </div>
-          <div>
-            <span className="font-medium">ترم :</span>
-            <span>{information[0].term}</span>
-          </div>
-          <div>
-            <span className="font-medium">ایمیل :</span>
-            <span>{information[0].Email}</span>
-          </div>
-        </div>
-        <button
-          onClick={toggleModslStatusHandler}
-          className="text-[#003B7E] bg-[#5e81d128] w-fit self-end px-3 py-1 mt-5 rounded-md"
-        >
-          ویرایش
-        </button>
       </div>
       <div
         className={`w-[100vw] h-[100vh] bg-[#504f4f99] top-0 right-0 absolute text-center flex justify-center items-center ${
@@ -84,7 +86,7 @@ const Profile = () => {
       >
         <div className="bg-[#fff] w-[40rem] flex flex-col items-center p-8 gap-0 rounded-md">
           <div className="mb-3 text-[#003B7E] font-medium">
-            <span>اطلاعات دانشجو</span>
+            <span className="text-lg font-bold">اطلاعات دانشجو</span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-x-8 gap-x-2 md:gap-y-6 gap-y-2 w-full">
             <div className="flex flex-col">
@@ -124,7 +126,9 @@ const Profile = () => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="sm:text-base font-medium text-sm">دانشکده</span>
+              <span className="sm:text-base font-medium text-sm self-start">
+                دانشکده
+              </span>
               <select className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm ">
                 <option selected disabled={true} value="" className="">
                   دانشکده

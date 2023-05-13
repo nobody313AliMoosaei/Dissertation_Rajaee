@@ -192,12 +192,17 @@ const ThesisDetails = ({ check }) => {
               دانلود صورت جلسه
             </button>
           </div>
-          <button className="bg-[#2080F6] border-2 sm:px-4 self-start p-2 mt-6 rounded-md text-lg text-[#fff] ">
-            تایید پایان‌نامه
-          </button>
+          <div className="flex md:flex-row md:gap-5 flex-col">
+            <button className="text-[#2080F6] border-2 sm:px-4 self-start p-2 mt-6 rounded-md text-lg border-[#2080f6] ">
+              عدم تایید پایان‌نامه
+            </button>
+            <button className="bg-[#2080F6] border-2 sm:px-4 self-start p-2 mt-6 rounded-md text-lg text-[#fff]">
+              تایید پایان‌نامه
+            </button>
+          </div>
         </div>
       </div>
-      <div className="bg-[#FFF] max-h-[70rem] overflow-scroll my-14 p-3 sm:p-7 rounded-md shadow-md ">
+      <div className="bg-[#FFF] max-h-[70rem] overflow-y-scroll my-14 p-3 sm:p-7 rounded-md shadow-md ">
         <div className="flex flex-row border-b-2  p-2  border-[#B0B9BE]">
           <Coment className="text-[#B0B9BE] text-xl ml-2" />
           <span className="text-[#000]">نظرات</span>
