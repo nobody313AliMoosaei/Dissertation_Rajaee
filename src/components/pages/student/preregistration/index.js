@@ -1,6 +1,5 @@
 import { useState } from "react";
-import FinalRegistration from "./finalregistration";
-
+//Components
 import PersonalInformation from "./personalinformation";
 import ThesisInformation from "./thesisinformation";
 import UploadThesis from "./uploadthesis";

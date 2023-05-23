@@ -6,7 +6,7 @@ import { ReactComponent as Reply } from "./../../../assets/svg/undo.svg";
 //PNG
 import Ellipse from "./../../../assets/image/Ellipse 1.png";
 
-const Comment = ({ styl, name, role, date, time, text, link }) => {
+const Comment = ({ styl, name, role, date, time, text }) => {
   return (
     <div className={`mt-5 ${styl}`}>
       <div className="border-2 p-2 border-[#EAECEF] rounded-md">
@@ -27,7 +27,6 @@ const Comment = ({ styl, name, role, date, time, text, link }) => {
           <div className="bg-[#EBEEF2] text-[#475466] rounded-md py-1 px-3 gap-1 text ">
             <a
               className="flex items-center flex-row-reverse"
-              onClick={link}
               href="#sendcomment"
             >
               <Reply />

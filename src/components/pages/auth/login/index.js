@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
 
 //Services
@@ -41,7 +41,7 @@ const Login = () => {
     if (response.status === 200) {
       setCookies("token", response.data.token);
       toast.success("با موفقیت وارد شدید");
-      navigate("/");
+      navigate("/student");
     } else {
       //error occurre
       console.log("response : ", response);

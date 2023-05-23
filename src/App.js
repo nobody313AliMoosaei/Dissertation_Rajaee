@@ -7,7 +7,6 @@ import "./App.css";
 //compoonents
 import Home from "./pages/home";
 import Layout from "./components/common/layout";
-import Auth from "./pages/auth";
 import Login from "./components/pages/auth/login";
 import SignUp from "./components/pages/auth/signup";
 import Student from "./pages/student";
@@ -16,6 +15,8 @@ import PreRegistration from "./components/pages/student/preregistration";
 import ThesisStatus from "./components/pages/student/thesisstatus";
 import Correspondence from "./components/pages/student/correspondence";
 import Profile from "./components/pages/student/profile";
+import ThesisList from "./components/pages/supervisor/thesislist";
+import ThesisDetails from "./components/pages/supervisor/thesisdetails";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<SignUp />} />
         </Route>
+        {/* route for student  */}
         <Route path="student" element={<Student />}>
           <Route
             path="/student/preregistration"
@@ -35,8 +37,11 @@ function App() {
           <Route path="/student/correspondence" element={<Correspondence />} />
           <Route path="/student/profile" element={<Profile />} />
         </Route>
-        {/* <Route path="student/*" element={<Student />} /> */}
-        <Route path="supervisor" element={<Supervisor />} />
+        {/* route for supervisor */}
+        <Route path="supervisor" element={<Supervisor />}>
+          <Route path="/supervisor" element={<ThesisList />} />
+          <Route path="/supervisor/detail/:id" element={<ThesisDetails />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

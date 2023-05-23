@@ -1,11 +1,12 @@
 import { useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 //SVG
 import { ReactComponent as Backward } from "../../../../assets/svg/backward.svg";
 import { ReactComponent as Coment } from "../../../../assets/svg/coment.svg";
 //Component
 import Comment from "../../../common/comment";
 
-const ThesisDetails = ({ check }) => {
+const ThesisDetails = ({}) => {
   const information = [
     {
       name: "علی",
@@ -55,18 +56,7 @@ const ThesisDetails = ({ check }) => {
       reply: [],
     },
   ];
-  // const ref = useRef(null);
-  // useEffect(() => {
-  //   link();
-  // }, []);
-  const link = () => {
-    // ref.current.focus();
-    // console.log("first");
-  };
-  // // const link = () => {
-  // //   document.getElementById("inputComment").focus();
-  // //   console.log("two");
-  // // };
+
   return (
     <div className="container mx-auto w-10/12">
       <div className="flex items-center justify-between">
@@ -88,12 +78,12 @@ const ThesisDetails = ({ check }) => {
         </div> */}
       </div>
       <div className="flex flex-col sm:flex-row justify-between">
-        <div className="flex flex-row border-solid border-2 rounded-md w-fit stroke-white bg-[#3B5DE7] mb-4 px-2 py-1 items-center">
-          <Backward />
-          <button onClick={check} className="text-white pr-2 text-lg">
-            بازگشت
-          </button>
-        </div>
+        <Link to={"/supervisor"}>
+          <div className="flex flex-row border-solid border-2 rounded-md w-fit stroke-white bg-[#3B5DE7] mb-4 px-2 py-1 items-center">
+            <Backward />
+            <button className="text-white pr-2 text-lg">بازگشت</button>
+          </div>
+        </Link>
         <div className="text-[#B0B9BE] flex gap-2 text-lg">
           <span className="text-black">آخرین ویرایش :</span>
           <span>1402/1/1</span>
@@ -232,7 +222,6 @@ const ThesisDetails = ({ check }) => {
                   date={comment.date}
                   time={comment.time}
                   text={comment.text}
-                  link={link}
                 />
                 {comment.reply.length === 0 ? (
                   <></>
@@ -247,7 +236,6 @@ const ThesisDetails = ({ check }) => {
                       date={reply.date}
                       time={reply.time}
                       text={reply.text}
-                      link={link}
                     />
                   ))
                 )}

@@ -7,7 +7,7 @@ import Loding from "../../../common/loding";
 import SingleList from "./singlelist";
 import Pagination from "../../../common/pagination";
 
-const ThesisList = ({ check }) => {
+const ThesisList = ({}) => {
   const [searchStudentNumber, setSearchStudentNumber] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
   const [indexList, setIndexList] = useState(1);
@@ -113,7 +113,6 @@ const ThesisList = ({ check }) => {
         {Array.isArray(thesis) &&
           thesis.map((item, index) => (
             <SingleList
-              check={check}
               key={index}
               id={item.id}
               name={item.name}

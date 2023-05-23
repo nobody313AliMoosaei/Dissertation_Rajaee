@@ -7,12 +7,17 @@ import "../../../../../App.css";
 // SVG
 import { ReactComponent as Backward } from "../../../../../assets/svg/backward.svg";
 import { ReactComponent as Trash } from "../../../../../assets/svg/close.svg";
+//Services
+import { UploadDissertation } from "../../../../../services/student";
+//Cookies
+import { Cookies } from "react-cookie";
 
 const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
   const [dissertationFile, setDissertationFile] = useState();
   const [proceedingsFile, setProceedingsFile] = useState();
   const [data, setData] = useState({});
-  const [thesisFile, setThesisFile] = useState({});
+  const cookies = new Cookies();
+  const [token, setCookie] = useState(cookies.get("token"));
 
   const changeHandler = (event) => {
     if (event.target.id === "thesis") {
@@ -23,24 +28,24 @@ const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
   };
   useEffect(() => {
     const personalInfo = sessionStorage.getItem("information");
-    const listPersianVocabulary = JSON.parse(
-      sessionStorage.getItem("listPersianVocabulary")
+    const KeyWords_Persian = JSON.parse(
+      sessionStorage.getItem("KeyWords_Persian")
     );
-    const listEnglishVocabulary = JSON.parse(
-      sessionStorage.getItem("listEnglishVocabulary")
+    const KeyWords_English = JSON.parse(
+      sessionStorage.getItem("KeyWords_English")
     );
     const thesisInformation = sessionStorage.getItem("thesisInformation");
     if (
       personalInfo &&
-      listEnglishVocabulary &&
-      listPersianVocabulary &&
+      KeyWords_English &&
+      KeyWords_Persian &&
       thesisInformation
     ) {
       setData({
         ...JSON.parse(personalInfo),
         ...JSON.parse(thesisInformation),
-        listEnglishVocabulary,
-        listPersianVocabulary,
+        KeyWords_English,
+        KeyWords_Persian,
       });
     }
   }, []);
@@ -57,14 +62,37 @@ const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
       theme: "light",
     });
 
+  const httpUploadDisertation = async () => {
+    const formData = new FormData();
+    formData.append("Dissertation_File", dissertationFile);
+    formData.append("Pro_File", proceedingsFile);
+    try {
+      const response = await UploadDissertation({
+        formData,
+        data,
+        token,
+      });
+
+      if (response.status === 200) {
+        console.log("با موفیت ثبت شد");
+        stepForwardHandler();
+      } else {
+        console.log(response);
+        toast.error("اضافه کردن پروژه ناموفق بود");
+      }
+    } catch (error) {
+      console.log("error in upload dissertation : ", error);
+    }
+  };
+
   const handelStoreInformation = () => {
-    console.log(data);
     if (!dissertationFile || !proceedingsFile) {
       notify();
     } else {
-      stepForwardHandler();
+      httpUploadDisertation();
     }
   };
+
   return (
     <div className="bg-[#fff] mt-10 p-5 rounded-md">
       <div className="flex flex-col">

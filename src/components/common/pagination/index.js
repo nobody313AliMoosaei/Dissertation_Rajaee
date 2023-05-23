@@ -9,8 +9,9 @@ const Pagination = ({ count, setIndexList, pageNumber }) => {
   return (
     <div className="flex justify-around items-center ">
       <button
+        disabled={pageNumber === pageCount ? true : false}
         onClick={() => setPage(pageNumber + 1)}
-        className="bg-[#003b7e29] sm:px-4 p-2 rounded-md text-lg text-[#003B7E]"
+        className={`bg-[#003b7e29] sm:px-4 p-2 rounded-md text-lg text-[#003B7E] disabled:cursor-not-allowed`}
       >
         بعدی
       </button>
@@ -21,8 +22,9 @@ const Pagination = ({ count, setIndexList, pageNumber }) => {
         <span className="font-medium">{pageCount}</span>
       </div>
       <button
+        disabled={pageNumber === 1 ? true : false}
         onClick={() => setPage(pageNumber - 1)}
-        className="bg-[#003b7e29] sm:px-4 p-2 rounded-md text-lg text-[#003B7E]"
+        className="bg-[#003b7e29] sm:px-4 p-2 rounded-md text-lg text-[#003B7E] disabled:cursor-not-allowed"
       >
         قبلی
       </button>

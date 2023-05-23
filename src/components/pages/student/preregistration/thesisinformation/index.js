@@ -61,12 +61,8 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
 
   useEffect(() => {
     const data = sessionStorage.getItem("thesisInformation");
-    const listEnglishVocabulary = sessionStorage.getItem(
-      "listEnglishVocabulary"
-    );
-    const listPersianVocabulary = sessionStorage.getItem(
-      "listPersianVocabulary"
-    );
+    const listEnglishVocabulary = sessionStorage.getItem("KeyWords_English");
+    const listPersianVocabulary = sessionStorage.getItem("KeyWords_Persian");
     if (data && Object.keys(data).length > 0) {
       setThesisInformation({ ...JSON.parse(data) });
     }
@@ -97,9 +93,9 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
 
   const handelStoreInformation = () => {
     if (
-      thesisInformation.persianTitle === "" ||
-      thesisInformation.englishTitle === "" ||
-      thesisInformation.abstract === "" ||
+      thesisInformation.Title_Persian === "" ||
+      thesisInformation.Title_English === "" ||
+      thesisInformation.Abstract === "" ||
       listPersianVocabulary.length === 0 ||
       listEnglishVocabulary.length === 0 ||
       Object.keys(thesisInformation).length === 0
@@ -111,11 +107,11 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
         JSON.stringify(thesisInformation)
       );
       sessionStorage.setItem(
-        "listEnglishVocabulary",
+        "KeyWords_English",
         JSON.stringify(listEnglishVocabulary)
       );
       sessionStorage.setItem(
-        "listPersianVocabulary",
+        "KeyWords_Persian",
         JSON.stringify(listPersianVocabulary)
       );
       stepForwardHandler();
@@ -141,9 +137,9 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
             <input
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
               placeholder="عنوان پایان‌نامه را وارد کنید"
-              name="persianTitle"
+              name="Title_Persian"
               onChange={updateData}
-              value={thesisInformation.persianTitle || ""}
+              value={thesisInformation.Title_Persian || ""}
               type={"text"}
             />
           </div>
@@ -154,8 +150,8 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
             <input
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
               placeholder="عنوان پایان‌نامه را وارد کنید"
-              name="englishTitle"
-              value={thesisInformation.englishTitle || ""}
+              name="Title_English"
+              value={thesisInformation.Title_English || ""}
               onChange={updateData}
               type={"text"}
             />
@@ -164,8 +160,8 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
             <span className="sm:text-base font-medium text-sm">چکیده</span>
             <textarea
               className="border-2  focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-20 resize-none h-16 p-1 sm:text-base text-sm "
-              name="abstract"
-              value={thesisInformation.abstract || ""}
+              name="Abstract"
+              value={thesisInformation.Abstract || ""}
               onChange={updateData}
               rows={4}
             />

@@ -6,7 +6,6 @@ import "../../../../../App.css";
 
 //services
 import { GetAllTeacher } from "../../../../../services/student";
-//Components
 
 const options = [
   {
@@ -32,6 +31,8 @@ const PersonalInformation = ({ stepForwardHandler }) => {
   const [teachers, setTeachers] = useState([]);
   const [filterTeachers, setFilterTeachres] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSelectTeacher1, setIsSelectTeacher1] = useState(true);
+  const [isSelectTeacher2, setIsSelectTeacher2] = useState(true);
 
   const updateData = (e) => {
     setInformation({
@@ -50,6 +51,10 @@ const PersonalInformation = ({ stepForwardHandler }) => {
     const data = sessionStorage.getItem("information");
     if (data && Object.keys(data).length > 0) {
       setInformation({ ...JSON.parse(data) });
+      setIsSelectTeacher1(false);
+      if (information.Teacher_2 !== "" && information.Teacher_2 !== undefined) {
+        setIsSelectTeacher2(false);
+      }
     }
     asyncGetTeacherList();
   }, []);
@@ -86,7 +91,20 @@ const PersonalInformation = ({ stepForwardHandler }) => {
       Object.keys(information).length < 5
     ) {
       notify();
+    } else if (
+      information.Teacher_1 === information.Teacher_2 ||
+      information.Teacher_1 === information.Teacher_3 ||
+      (information.Teacher_2 === information.Teacher_3 &&
+        information.Teacher_2 !== undefined)
+    ) {
+      toast.error("استاد راهنمای تکراری وجود دارد!!", {});
     } else {
+      if (information.Teacher_2 === "") {
+        delete information["Teacher_2"];
+      }
+      if (information.Teacher_3 === "") {
+        delete information["Teacher_3"];
+      }
       sessionStorage.setItem("information", JSON.stringify(information));
       stepForwardHandler();
     }
@@ -159,10 +177,13 @@ const PersonalInformation = ({ stepForwardHandler }) => {
             <select
               name="Teacher_1"
               value={information.Teacher_1 || ""}
-              onChange={updateData}
+              onChange={(e) => {
+                updateData(e);
+                setIsSelectTeacher1(false);
+              }}
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
             >
-              <option value="" className="">
+              <option disabled selected value="" className="">
                 استاد راهنما مورد نظر خود را انتخاب کنید
               </option>
               {filterTeachers.map((option) => (
@@ -179,11 +200,15 @@ const PersonalInformation = ({ stepForwardHandler }) => {
             </span>
             <select
               name="Teacher_2"
+              disabled={isSelectTeacher1}
               value={information.Teacher_2 || ""}
-              onChange={updateData}
+              onChange={(e) => {
+                updateData(e);
+                setIsSelectTeacher2(false);
+              }}
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
             >
-              <option className="">
+              <option value="" className="">
                 استاد راهنما مورد نظر خود را انتخاب کنید
               </option>
               {filterTeachers.map((option) => (
@@ -200,8 +225,12 @@ const PersonalInformation = ({ stepForwardHandler }) => {
             </span>
             <select
               name="Teacher_3"
+              disabled={isSelectTeacher2}
               value={information.Teacher_3 || ""}
-              onChange={updateData}
+              onChange={(e) => {
+                updateData(e);
+                // setIsSelectTeacher2(false);
+              }}
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
             >
               <option className="">
