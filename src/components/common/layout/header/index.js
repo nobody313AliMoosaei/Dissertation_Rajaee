@@ -44,10 +44,12 @@ const Header = () => {
           <img src={Logo} alt="LOGo" />
         </Link>
         <div className="hidden xl:flex justify-center gap-x-5 grow">
-          <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
-            صفحه اصلی
-            {/* <ArrowDown className="w-5" /> */}
-          </span>
+          <Link to={"/"}>
+            <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+              صفحه اصلی
+              {/* <ArrowDown className="w-5" /> */}
+            </span>
+          </Link>
           <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
             اخبار و اطلاعیه ها
             {/* <ArrowDown className="w-5" /> */}

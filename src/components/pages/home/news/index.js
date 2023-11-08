@@ -11,6 +11,9 @@ import "swiper/css/autoplay";
 
 //components
 import SingleNews from "./singleNews";
+//SVG
+import { ReactComponent as Back } from "../../../../assets/svg/keyboard_backspace_FILL0_wght400_GRAD0_opsz24.svg";
+import { Link } from "react-router-dom";
 
 const News = () => {
   const newsList = [
@@ -42,11 +45,19 @@ const News = () => {
 
   return (
     <div className="block">
-      <div className="my-8 text-center">
-        <span className="text-xl font-bold border-b-2 border-b-slate-900  ">
-          اخرین اخبار
-        </span>
-        <span>مشاهده همه</span>
+      <div className="grid grid-cols-3 w-full my-8 text-center">
+        <span></span>
+        <div className="">
+          <span className="text-xl font-bold border-b-2 border-b-slate-900  ">
+            اخرین اخبار
+          </span>
+        </div>
+        <Link className="w-fit self-center justify-self-center" to={"/news"}>
+          <div className="flex items-center cursor-pointer w-fit  text-[#1b4999]">
+            <span className="">مشاهده همه</span>
+            <Back className="text-black" />
+          </div>
+        </Link>
       </div>
       <div className="w-[98vw] flex flex-row justify-center items-center">
         <div className="md:w-3/4 w-full self-center">

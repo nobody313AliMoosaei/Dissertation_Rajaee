@@ -17,6 +17,7 @@ import Correspondence from "./components/pages/student/correspondence";
 import Profile from "./components/pages/student/profile";
 import ThesisList from "./components/pages/supervisor/thesislist";
 import ThesisDetails from "./components/pages/supervisor/thesisdetails";
+import News from "./pages/news";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<SignUp />} />
+          <Route path="/news" element={<News />} />
         </Route>
         {/* route for student  */}
         <Route path="student" element={<Student />}>
