@@ -1,5 +1,5 @@
 // Swiper
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
+import { Navigation, Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -46,6 +46,7 @@ const News = () => {
         <span className="text-xl font-bold border-b-2 border-b-slate-900  ">
           اخرین اخبار
         </span>
+        <span>مشاهده همه</span>
       </div>
       <div className="w-[98vw] flex flex-row justify-center items-center">
         <div className="md:w-3/4 w-full self-center">
