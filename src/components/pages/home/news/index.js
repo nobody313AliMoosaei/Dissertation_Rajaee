@@ -88,6 +88,7 @@ const News = () => {
               newsList.map((item, index) => (
                 <SwiperSlide key={index}>
                   <SingleNews
+                    id={item.id}
                     title={item.title}
                     date={item.date}
                     text={item.text}

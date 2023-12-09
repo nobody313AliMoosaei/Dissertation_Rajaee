@@ -13,6 +13,7 @@ const SignUp = () => {
   const [dataSingUp, serDataSignUp] = useState({});
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const updateData = (e) => {
     serDataSignUp({
@@ -37,10 +38,10 @@ const SignUp = () => {
       toast.success("اطلاعات با موفقیت ثبت شد");
       setCookies("token", response.data.token);
       console.log(response);
-      // navigate("/");
+      navigate("/login");
     } else {
       //error occurre
-      toast.success("اطلاعات با موفقیت ثبت نشد");
+      toast.error("اطلاعات با موفقیت ثبت نشد");
       console.log("response : ", response);
     }
 

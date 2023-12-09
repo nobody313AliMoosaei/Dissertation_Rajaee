@@ -1,3 +1,7 @@
+//SVG
+import { ReactComponent as Home } from "../../assets/svg/home-2.svg";
+import { ReactComponent as Left } from "../../assets/svg/arrow-left.svg";
+//Components
 import SingleNews from "../../components/pages/home/news/singleNews";
 
 const News = () => {
@@ -31,12 +35,18 @@ const News = () => {
   return (
     <div className="flex justify-center items-center w-full mt-36">
       <div className="w-10/12">
+        <div className="flex items-center gap-x-2 mb-8">
+          <Home />
+          <Left />
+          <span className="text-[#B0B9BE]">لیست اخبار</span>
+        </div>
         {newsList.length > 0 ? (
-          <div className="flex flex-wrap justify-center gap-5">
+          <div className="flex flex-wrap justify-start gap-5">
             {Array.isArray(newsList) &&
               newsList.map((item, index) => (
                 <SingleNews
                   key={index}
+                  id={item.id}
                   title={item.title}
                   date={item.date}
                   text={item.text}

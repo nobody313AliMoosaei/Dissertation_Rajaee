@@ -55,7 +55,7 @@ const Header = () => {
       </div>
       <div className="flex flex-row gap-4">
         <p>
-          سلام ،<span className="px-2"> کاربر عزیز</span>عزیز خوش آمدی&#128075;
+          سلام ،<span className="px-2"> کاربر</span>عزیز خوش آمدی&#128075;
         </p>
         <span className="font-bold text-lg">|</span>
         <div className="flex gap-4 ">

@@ -18,6 +18,7 @@ import Profile from "./components/pages/student/profile";
 import ThesisList from "./components/pages/supervisor/thesislist";
 import ThesisDetails from "./components/pages/supervisor/thesisdetails";
 import News from "./pages/news";
+import DetailNews from "./components/pages/news/detailNews";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<SignUp />} />
           <Route path="/news" element={<News />} />
+          <Route path="/news/detail/:id" element={<DetailNews />} />
         </Route>
         {/* route for student  */}
         <Route path="student" element={<Student />}>

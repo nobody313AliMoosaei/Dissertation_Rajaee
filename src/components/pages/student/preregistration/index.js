@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //Components
 import PersonalInformation from "./personalinformation";
 import ThesisInformation from "./thesisinformation";
 import UploadThesis from "./uploadthesis";
+//Cookies
+import { Cookies } from "react-cookie";
+//Services
+import { GetDissertation } from "../../../../services/student";
+import Loding from "../../../common/loding";
+import { computeHeadingLevel } from "@testing-library/react";
 
 const PreRegistration = () => {
   const [step, setStep] = useState(0);
+  const [dissertationData, setDissertationData] = useState({});
+  const [isLoading, setIsLoading] = useState(0);
+  const cookies = new Cookies();
+  const [token, setCookie] = useState(cookies.get("token"));
+
+  useEffect(() => {
+    asyncGetDissertation();
+  }, []);
 
   const stepHandler = (reqCondition = "forward") => {
     if (reqCondition === "forward") {
@@ -13,6 +27,27 @@ const PreRegistration = () => {
     } else {
       setStep(step - 1);
     }
+  };
+
+  const asyncGetDissertation = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GetDissertation(token);
+
+      //check repsonse status
+      if (response.status === 200) {
+        setDissertationData({ ...response.data });
+        // console.log(dissertationData);
+        if (response.data.statusDissertation !== 0) {
+          setStep(3);
+        }
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -60,7 +95,9 @@ const PreRegistration = () => {
             </span>
           </div>
         </div>
-        {step === 0 ? (
+        {isLoading ? (
+          <Loding />
+        ) : step === 0 ? (
           <PersonalInformation
             stepForwardHandler={() => stepHandler("forward")}
           />
@@ -71,6 +108,7 @@ const PreRegistration = () => {
           />
         ) : step === 2 ? (
           <UploadThesis
+            dis_Id={dissertationData.dissertationId}
             stepBackwardHandler={() => stepHandler("backward")}
             stepForwardHandler={() => stepHandler("forward")}
           />

@@ -8,11 +8,18 @@ import "../../../../../App.css";
 import { ReactComponent as Backward } from "../../../../../assets/svg/backward.svg";
 import { ReactComponent as Trash } from "../../../../../assets/svg/close.svg";
 //Services
-import { UploadDissertation } from "../../../../../services/student";
+import {
+  UploadDissertation,
+  UploadUpdateDissertation,
+} from "../../../../../services/student";
 //Cookies
 import { Cookies } from "react-cookie";
 
-const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
+const UploadThesis = ({
+  stepForwardHandler,
+  stepBackwardHandler,
+  dis_Id = -1,
+}) => {
   const [dissertationFile, setDissertationFile] = useState();
   const [proceedingsFile, setProceedingsFile] = useState();
   const [data, setData] = useState({});
@@ -64,14 +71,24 @@ const UploadThesis = ({ stepForwardHandler, stepBackwardHandler }) => {
 
   const httpUploadDisertation = async () => {
     const formData = new FormData();
-    formData.append("Dissertation_File", dissertationFile);
-    formData.append("Pro_File", proceedingsFile);
+    formData.append("DissertationFile", dissertationFile);
+    formData.append("ProFile", proceedingsFile);
     try {
-      const response = await UploadDissertation({
-        formData,
-        data,
-        token,
-      });
+      var response;
+      if (dis_Id) {
+        response = await UploadUpdateDissertation({
+          formData,
+          data,
+          token,
+          dis_Id,
+        });
+      } else {
+        response = await UploadDissertation({
+          formData,
+          data,
+          token,
+        });
+      }
 
       if (response.status === 200) {
         console.log("با موفیت ثبت شد");

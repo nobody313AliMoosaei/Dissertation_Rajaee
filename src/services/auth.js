@@ -2,7 +2,7 @@ import useFetch from "./../hooks/useFetch";
 
 export async function PostUserData({ userName, password }) {
   //reg-getinfo
-  const apiCall = await useFetch().post("SignUp/Login", {
+  const apiCall = await useFetch().post("Login", {
     userName: userName,
     password: password,
   });
@@ -11,7 +11,7 @@ export async function PostUserData({ userName, password }) {
 
 export async function PostUserDataSignUp({ userName, nationalCode, email }) {
   //reg-getinfo
-  const apiCall = await useFetch().post("SignUp/Register", {
+  const apiCall = await useFetch().post("SignUp", {
     userName: userName,
     email: email,
     nationalCode: nationalCode,

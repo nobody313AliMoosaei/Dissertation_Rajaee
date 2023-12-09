@@ -14,6 +14,13 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
   const [persianVocabulary, setPersianVocabulary] = useState();
   const [listPersianVocabulary, setListPersianVocabulary] = useState([]);
   const [thesisInformation, setThesisInformation] = useState({});
+
+  function contain_persian_char(str) {
+    var p = /^[\u0600-\u06FF\s]+$/;
+    const persian = str.filter((item) => p.test(item));
+    const english = str.filter((item) => !p.test(item));
+  }
+
   const addCliclHandler = (name) => {
     if (
       englishVocabulary !== undefined &&
@@ -96,8 +103,8 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
       thesisInformation.Title_Persian === "" ||
       thesisInformation.Title_English === "" ||
       thesisInformation.Abstract === "" ||
-      listPersianVocabulary.length === 0 ||
-      listEnglishVocabulary.length === 0 ||
+      // listPersianVocabulary.length === 0 ||
+      // listEnglishVocabulary.length === 0 ||
       Object.keys(thesisInformation).length === 0
     ) {
       notify();

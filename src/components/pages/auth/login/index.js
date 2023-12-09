@@ -36,12 +36,12 @@ const Login = () => {
       password,
     });
 
-    console.log("response : ", response.status);
+    // console.log("response : ", response.status);
 
     if (response.status === 200) {
       setCookies("token", response.data.token);
       toast.success("با موفقیت وارد شدید");
-      navigate("/student");
+      navigate(`/${response.data.role}`);
     } else {
       //error occurre
       console.log("response : ", response);
@@ -77,7 +77,7 @@ const Login = () => {
               onChange={updateData}
               className="border-2 border-[#9B9B9B] focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 rounded-md mt-1 sm:font-medium sm:h-12 h-10 p-1 sm:text-base text-sm "
               placeholder="کدملی خود را وارد کنید"
-              type={"text"}
+              type={"password"}
             />
           </div>
           <ReCAPTCHA sitekey="6LcnubclAAAAABYr52Z02fiCaWrT-Cyc-3W4N-z8" />

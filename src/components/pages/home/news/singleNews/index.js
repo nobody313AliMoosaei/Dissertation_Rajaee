@@ -1,10 +1,11 @@
 //png
+import { Link } from "react-router-dom";
 import ImageNews from "../../../../../assets/image/news.png";
 
 //SVG
 import { ReactComponent as Calendar } from "../../../../../assets/svg/calendar.svg";
 
-const SingleNews = ({ title, date, text }) => {
+const SingleNews = ({ id, title, date, text }) => {
   return (
     <div className="flex justify-center">
       <div className="p-4 bg-[#fff] w-[22rem]  flex items-center flex-col rounded-md">
@@ -20,9 +21,11 @@ const SingleNews = ({ title, date, text }) => {
           <span className=" text-base h-12 overflow-hidden  overflow-ellipsis ">
             {text}
           </span>
-          <button className="my-2 border-2 border-[#003B7E] p-2">
-            بیشتر بخوانید
-          </button>
+          <Link className="w-full" to={`/news/detail/${id}`}>
+            <button className="my-2 w-full border-2 border-[#003B7E] p-2">
+              بیشتر بخوانید
+            </button>
+          </Link>
         </div>
       </div>
     </div>

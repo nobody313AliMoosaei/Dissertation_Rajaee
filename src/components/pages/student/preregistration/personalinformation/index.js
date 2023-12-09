@@ -5,30 +5,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../../../../App.css";
 
 //services
-import { GetAllTeacher } from "../../../../../services/student";
-
-const options = [
-  {
-    label: "کامپیوتر",
-    value: "کامپیوتر",
-  },
-  {
-    label: "برق",
-    value: "برق",
-  },
-  {
-    label: "معماری",
-    value: "معماری",
-  },
-  {
-    label: "عمران",
-    value: "عمران",
-  },
-];
+import { GetAllTeacher, GetAllCollage } from "../../../../../services/student";
 
 const PersonalInformation = ({ stepForwardHandler }) => {
   const [information, setInformation] = useState({});
   const [teachers, setTeachers] = useState([]);
+  const [colleges, setColleges] = useState([]);
   const [filterTeachers, setFilterTeachres] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSelectTeacher1, setIsSelectTeacher1] = useState(true);
@@ -42,12 +24,17 @@ const PersonalInformation = ({ stepForwardHandler }) => {
   };
 
   const filterteachers = (e) => {
-    const result = teachers.filter((item) => item.college === e.target.value);
+    console.log(e.target.value);
+    console.log(teachers[0].collegRef);
+    const result = teachers.filter(
+      (item) => Number(item.collegRef) === Number(e.target.value)
+    );
     setFilterTeachres(result);
     updateData(e);
   };
 
   useEffect(() => {
+    asyncGetCollageList();
     const data = sessionStorage.getItem("information");
     if (data && Object.keys(data).length > 0) {
       setInformation({ ...JSON.parse(data) });
@@ -68,6 +55,24 @@ const PersonalInformation = ({ stepForwardHandler }) => {
       if (response.status === 200) {
         setTeachers([...response.data]);
         setFilterTeachres([...response.data]);
+        // console.log(response);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+
+  const asyncGetCollageList = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GetAllCollage();
+
+      //check repsonse status
+      if (response.status === 200) {
+        setColleges([...response.data]);
         // console.log(response);
       } else {
         //error occure
@@ -156,16 +161,16 @@ const PersonalInformation = ({ stepForwardHandler }) => {
             <span className="sm:text-base font-medium text-sm">دانشکده</span>
             <select
               onChange={filterteachers}
-              name="College"
-              value={information.College || ""}
+              name="CollegeRef"
+              value={information.CollegeRef || ""}
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
             >
               <option disabled selected value="">
                 دانشکده مورد نظر خود را انتخاب کنید
               </option>
-              {options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
+              {colleges.map((option) => (
+                <option key={option.code} value={option.id}>
+                  {option.title}
                 </option>
               ))}
             </select>
