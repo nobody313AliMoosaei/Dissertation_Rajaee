@@ -19,6 +19,7 @@ import ThesisList from "./components/pages/supervisor/thesislist";
 import ThesisDetails from "./components/pages/supervisor/thesisdetails";
 import News from "./pages/news";
 import DetailNews from "./components/pages/news/detailNews";
+import Forms from "./components/pages/student/form";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         </Route>
         {/* route for student  */}
         <Route path="student" element={<Student />}>
+          <Route path="/student" element={<Forms />} />
           <Route
             path="/student/preregistration"
             element={<PreRegistration />}

@@ -49,7 +49,7 @@ const urls_menu_mobile = [
   },
   {
     id: 2,
-    url: "/Student/preregistration",
+    url: "/Student/",
     text: "پیش ثبت نام",
     icon: <Writerinformation />,
   },
