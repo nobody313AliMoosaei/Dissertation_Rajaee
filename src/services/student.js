@@ -1,10 +1,17 @@
 import useFetch from "./../hooks/useFetch";
 import useFetchGeneral from "./../hooks/useFetch2";
 
-const endPoint = "/GetAllTeacher";
+export async function GetRefreshToken(token) {
+  const apiCall = await useFetch().get("Dissertation/IsValidUser", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return apiCall;
+}
 
 export async function GetAllTeacher() {
-  const apiCall = await useFetchGeneral().get(endPoint);
+  const apiCall = await useFetchGeneral().get("/GetAllTeacher");
   return apiCall;
 }
 
@@ -35,11 +42,9 @@ export async function GetDissertation(token) {
   return apiCall;
 }
 
-export async function DownloadDissertation(token, addressFile) {
-  const apiCall = await useFetch().post("/Dissertation/Download", addressFile, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+export async function DownloadDissertation(addressFile) {
+  const apiCall = await useFetchGeneral().post("/DownloadFile", {
+    fileAddress: addressFile,
   });
   return apiCall;
 }
@@ -53,8 +58,9 @@ export async function UploadDissertation({ formData, data, token }) {
   formData.append("Teacher_1", data.Teacher_1);
   formData.append("LastName", data.LastName);
   formData.append("FirstName", data.FirstName);
-  formData.append("CollegeRef", data.College);
+  formData.append("CollegeRef", data.CollegeRef);
   formData.append("Abstract", data.Abstract);
+  formData.append("Email", "alimahjub.138064m@gmail.com");
   if (data.Teacher_2) {
     formData.append("Teacher_2", data.Teacher_2);
   }
@@ -102,5 +108,35 @@ export async function UploadUpdateDissertation({
     }
   );
 
+  return apiCall;
+}
+
+export async function GetAllComments(id, pagenumber, pageSize) {
+  const apiCall = await useFetchGeneral().get(
+    `/GetAllCommentsOfDissertationById?DissertationId=${id}&PageNumber=${pagenumber}&PageSize=${pageSize}`
+  );
+  return apiCall;
+}
+export async function SendComment(token, userId, dissertationId, title, dsr) {
+  const apiCall = await useFetch().post(
+    "/Dissertation/SendComment",
+    {
+      userId: userId,
+      dissertationId: dissertationId,
+      title: title,
+      dsr: dsr,
+      commentId: 0,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return apiCall;
+}
+
+export async function GetUserById(id) {
+  const apiCall = await useFetchGeneral().post(`/GetUserById?UserId=${id}`);
   return apiCall;
 }

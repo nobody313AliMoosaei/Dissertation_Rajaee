@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ReactComponent as Book } from "../../../../assets/svg/book.svg";
 import { ReactComponent as Student } from "../../../../assets/svg/student.svg";
 import { ReactComponent as EducationUnit } from "../../../../assets/svg/educationUnit.svg";
+import { PostGetData } from "../../../../services/home";
 
 const Information = () => {
   // const [scrollPosition, setScrollPosition] = useState();
@@ -66,6 +67,29 @@ const Information = () => {
   //     }
   //   }, 100);
   // }
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    asyncGetData();
+  }, []);
+
+  const asyncGetData = async () => {
+    setIsLoading(true);
+    setError({});
+    const response = await PostGetData();
+
+    // console.log("response : ", response.status);
+
+    if (response.status === 200) {
+      setData(response.data);
+    } else {
+      //error occurre
+      console.log("response : ", response);
+    }
+
+    setIsLoading(false);
+  };
 
   return (
     <div className="md:w-10/12  flex flex-col items-center justify-center md:my-7">
@@ -73,7 +97,7 @@ const Information = () => {
         <div className="flex flex-col items-center gap-2 text-center ">
           <Book />
           <span className="text-xl font-medium text-[#003B7E]" id="graduation">
-            0
+            {data.dissertationCount}
           </span>
           <span className="text-lg text-center font-medium">مقالات</span>
         </div>
@@ -83,23 +107,23 @@ const Information = () => {
             className="text-xl font-medium text-[#003B7E]"
             id="educationUnit"
           >
-            0
+            {data.collegeCount}
           </span>
           <span className="text-lg font-medium">واحد اموزشی</span>
         </div>
         <div className="flex flex-col items-center gap-2 text-center">
           <EducationUnit />
           <span className="text-xl font-medium text-[#003B7E]" id="supervisor">
-            0
+            {data.teachersCount}
           </span>
           <span className="text-lg font-medium">استاد راهنما</span>
         </div>
         <div className="flex flex-col items-center gap-2 text-center">
           <Student />
           <span className="text-xl font-medium text-[#003B7E]" id="masterJudge">
-            0
+            {data.studentCount}
           </span>
-          <span className="text-lg font-medium">استاد داور</span>
+          <span className="text-lg font-medium"> دانشجویان</span>
         </div>
       </div>
     </div>

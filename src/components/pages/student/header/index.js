@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 //SVG
 import { ReactComponent as Profile } from "../../../../assets/svg/profile-circle.svg";
 import { ReactComponent as ArrowDown } from "../../../../assets/svg/arrow-down.svg";
+import { Cookies } from "react-cookie";
 
 const Header = () => {
   const [openProfile, setOpenprofile] = useState(false);
   const [isOpenmodalExit, setIsOpenmodalExit] = useState(false);
+  const cookies = new Cookies();
+  const fullName = cookies.get("fullName");
 
   const toggleModslStatusHandler = () => {
     setIsOpenmodalExit(!isOpenmodalExit);
@@ -72,6 +75,7 @@ const Header = () => {
             openProfile ? "rotate-180 duration-300" : "duration-300"
           }`}
         />
+        <span>{fullName}</span>
         <Profile className="cursor-pointer" />
         <div
           className={`absolute flex flex-col top-[5.4rem] left-5 shadow-lg rounded-md to bg-[#fff] p-2 gap-3 ${

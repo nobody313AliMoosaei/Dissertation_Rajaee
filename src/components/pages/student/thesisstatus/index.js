@@ -25,9 +25,17 @@ const ThesisStatus = () => {
 
       //check repsonse status
       if (response.status === 200) {
-        setStatus(response.data.statusDissertation);
+        // setStatus(response.data[response.data.length - 1].statusDissertation);
+        console.log(response.data.length);
+        if (response.data.length > 0) {
+          setStatus(response.data[response.data.length - 1].statusDissertation);
+        } else {
+          setStatus(-1);
+        }
+      } else if (response.status === 404) {
+        setStatus(-1);
       } else {
-        //error occure
+        //erorr
       }
     } catch (error) {
       console.log(error);
@@ -126,6 +134,10 @@ const ThesisStatus = () => {
             ) : status === 6 ? (
               <span className="text-[#037724] text-lg font-medium">
                 پایان‌نامه شما توسط کارشناس امور پایان‌نامه تایید شد.
+              </span>
+            ) : status === -1 ? (
+              <span className="text-[#f17e03e7] text-lg font-medium">
+                هنوز پایان نامه خود را ارسال نکرده اید.
               </span>
             ) : (
               <span className="text-yellow-400 text-lg font-medium">

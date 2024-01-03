@@ -73,9 +73,10 @@ const UploadThesis = ({
     const formData = new FormData();
     formData.append("DissertationFile", dissertationFile);
     formData.append("ProFile", proceedingsFile);
+
     try {
       var response;
-      if (dis_Id) {
+      if (dis_Id !== -1) {
         response = await UploadUpdateDissertation({
           formData,
           data,

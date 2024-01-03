@@ -37,7 +37,7 @@ const SignUp = () => {
     if (response.status === 200) {
       toast.success("اطلاعات با موفقیت ثبت شد");
       setCookies("token", response.data.token);
-      console.log(response);
+      // console.log(response);
       navigate("/login");
     } else {
       //error occurre

@@ -5,9 +5,13 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../../../../App.css";
 
 //services
-import { GetAllTeacher, GetAllCollage } from "../../../../../services/student";
+import {
+  GetAllTeacher,
+  GetAllCollage,
+  GetUserById,
+} from "../../../../../services/student";
 
-const PersonalInformation = ({ stepForwardHandler }) => {
+const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
   const [information, setInformation] = useState({});
   const [teachers, setTeachers] = useState([]);
   const [colleges, setColleges] = useState([]);
@@ -34,6 +38,9 @@ const PersonalInformation = ({ stepForwardHandler }) => {
   };
 
   useEffect(() => {
+    if (id) {
+      asyncGetUserById();
+    }
     asyncGetCollageList();
     const data = sessionStorage.getItem("information");
     if (data && Object.keys(data).length > 0) {
@@ -56,6 +63,24 @@ const PersonalInformation = ({ stepForwardHandler }) => {
         setTeachers([...response.data]);
         setFilterTeachres([...response.data]);
         // console.log(response);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  };
+
+  const asyncGetUserById = async () => {
+    setIsLoading(true);
+    try {
+      const response = await GetUserById(id);
+
+      //check repsonse status
+      if (response.status === 200) {
+        console.log(response);
+        setInformation(response.data);
       } else {
         //error occure
       }

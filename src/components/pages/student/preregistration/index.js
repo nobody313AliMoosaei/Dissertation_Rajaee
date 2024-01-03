@@ -18,7 +18,7 @@ const PreRegistration = () => {
   const [token, setCookie] = useState(cookies.get("token"));
 
   useEffect(() => {
-    asyncGetDissertation();
+    // asyncGetDissertation();
   }, []);
 
   const stepHandler = (reqCondition = "forward") => {
@@ -36,11 +36,14 @@ const PreRegistration = () => {
 
       //check repsonse status
       if (response.status === 200) {
-        setDissertationData({ ...response.data });
-        // console.log(dissertationData);
-        if (response.data.statusDissertation !== 0) {
-          setStep(3);
+        if (response.data.length > 0) {
+          setDissertationData(response.data[response.data.length - 1]);
+          console.log(response.data[response.data.length - 1]);
+          if (response.data[response.data.length - 1].statusDissertation > 0) {
+            setStep(3);
+          }
         }
+        // console.log(dissertationData);
       } else {
         //error occure
       }
@@ -99,6 +102,7 @@ const PreRegistration = () => {
           <Loding />
         ) : step === 0 ? (
           <PersonalInformation
+            id={dissertationData.studentId}
             stepForwardHandler={() => stepHandler("forward")}
           />
         ) : step === 1 ? (

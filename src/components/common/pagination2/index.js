@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
-const Pagination = ({
-  action,
-  setPageNumber,
-  pageNumber,
-  isFinish,
-  setIsFinish,
-}) => {
+import { ReactComponent as Next } from "./../../../assets/svg/arrow_forward_ios_FILL0_wght400_GRAD0_opsz24.svg";
+
+const Pagination2 = ({ setPageNumber, isFinish, pageNumber, action }) => {
   return (
-    <div className="flex justify-around items-center ">
+    <div className="flex justify-center gap-x-4 items-center ">
       <button
         disabled={isFinish}
         onClick={() => {
@@ -16,11 +12,10 @@ const Pagination = ({
         }}
         className={`bg-[#003b7e29] sm:px-4 p-2 rounded-md text-lg text-[#003B7E] disabled:cursor-not-allowed`}
       >
-        بعدی
+        <Next />
       </button>
       <div className="flex gap-2 text--lg">
-        <span>صفحه</span>
-        <span className="font-medium">{pageNumber}</span>
+        <span>{pageNumber}</span>
       </div>
       <button
         disabled={pageNumber === 1 ? true : false}
@@ -30,10 +25,10 @@ const Pagination = ({
         }}
         className="bg-[#003b7e29] sm:px-4 p-2 rounded-md text-lg text-[#003B7E] disabled:cursor-not-allowed"
       >
-        قبلی
+        <Next className="rotate-180" />
       </button>
     </div>
   );
 };
 
-export default Pagination;
+export default Pagination2;

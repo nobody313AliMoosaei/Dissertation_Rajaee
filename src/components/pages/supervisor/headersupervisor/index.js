@@ -8,9 +8,13 @@ import { ReactComponent as Profile } from "./../../../../assets/svg/profile-circ
 
 //PNG
 import Logo from "./../../../../assets/image/logo.png";
+import { Cookies } from "react-cookie";
 const HeaderSupervisor = () => {
   const [isOpenNavbar, setIsOpenNavbar] = useState(false);
+  const [isOpenmodalExit, setIsOpenmodalExit] = useState(false);
   const [scrollPosition, setScrollPosition] = useState();
+  const cookies = new Cookies();
+  const [fullName, setCookie] = useState(cookies.get("fullName"));
 
   useEffect(() => {
     window.addEventListener("scroll", listenToScroll);
@@ -36,6 +40,36 @@ const HeaderSupervisor = () => {
     <div
       className={`${"bg-[#2A3042] text-[#fff] z-50 top-0 right-0 w-full rounded-none sm:py-1 py-4"} shadow-[0_2px_7px_0px_rgba(6,23,48,0.1)]`}
     >
+      <div
+        className={`z-20 w-[100vw] text-black h-[100vh] bg-[#504f4f99] top-0 right-0 fixed text-center flex justify-center items-center ${
+          isOpenmodalExit ? "flex" : "hidden"
+        }`}
+      >
+        <div className="bg-[#fff] p-5 rounded-sm">
+          <p className="mb-5 font-medium">
+            آیا میخواهید از پنل کاربری خود خارج شوید؟
+          </p>
+          <div className="flex flex-row-reverse justify-between">
+            <Link to={"/"}>
+              <button
+                onClick={() => {
+                  cookies.remove("token", { path: "/" });
+                  cookies.remove("fullName", { path: "/" });
+                }}
+                className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]"
+              >
+                خروج
+              </button>
+            </Link>
+            <button
+              onClick={() => setIsOpenmodalExit(!isOpenmodalExit)}
+              className="px-4 py-1 border-solid border-2 rounded-md border-[#003B7E]"
+            >
+              بستن
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="flex w-10/12 sm:justify-between justify-center items-center container mx-auto">
         <Link className=" mb-3 flex items-center" to={""}>
           {/* <img className="w-12 h-12 md:w-20 md:h-20" src={Logo} alt="LOGo" /> */}
@@ -67,9 +101,17 @@ const HeaderSupervisor = () => {
           >
             <Hamburger />
           </button> */}
-          <div className="hidden sm:flex text-[#fff] justify-center items-center gap-3">
+          <div className="hidden group sm:flex text-[#fff] justify-center items-center gap-3 relative">
             <Profile className="stroke-white" />
-            <span>نام استاد</span>
+            <span>{fullName}</span>
+            <div className="absolute bg-white text-black hidden group-hover:block top-10 py-2 px-4 rounded-md shadow-md min-w-[6rem]">
+              <span
+                onClick={() => setIsOpenmodalExit(true)}
+                className="cursor-pointer"
+              >
+                خروج
+              </span>
+            </div>
           </div>
           {/* <Link onClick={refreshPage} to={"/login"}>
             <button className="w-48 font-medium text-sm hidden xl:block bg-[#003B7E] border-2 border-[#003B7E] hover:bg-white hover:text-[#003B7E] duration-200 text-white py-3 px-4 rounded-lg">

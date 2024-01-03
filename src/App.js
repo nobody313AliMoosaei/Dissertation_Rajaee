@@ -43,10 +43,10 @@ function App() {
           <Route path="/student/correspondence" element={<Correspondence />} />
           <Route path="/student/profile" element={<Profile />} />
         </Route>
-        {/* route for supervisor */}
-        <Route path="supervisor" element={<Supervisor />}>
-          <Route path="/supervisor" element={<ThesisList />} />
-          <Route path="/supervisor/detail/:id" element={<ThesisDetails />} />
+        {/* route for Employees */}
+        <Route path="employees" element={<Supervisor />}>
+          <Route path="/employees" element={<ThesisList />} />
+          <Route path="/employees/detail/:id" element={<ThesisDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>

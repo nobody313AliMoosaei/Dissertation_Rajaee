@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 //SVG
 import { ReactComponent as Hamburger } from "../../../../assets/svg/hamburger.svg";
 import { ReactComponent as CloseCircle } from "../../../../assets/svg/closeCircle.svg";
@@ -78,6 +78,7 @@ const Meno = () => {
   const [isOpenmodalExit, setIsOpenmodalExit] = useState(false);
   const cookies = new Cookies();
   const [token, setCookie, removeCookie] = useState(cookies.get("token"));
+  const navigate = useNavigate();
 
   const toggleNavbarStatusHandler = () => {
     setIsOpenNavbar(!isOpenNavbar);
@@ -100,17 +101,17 @@ const Meno = () => {
             آیا میخواهید از پنل کاربری خود خارج شوید؟
           </p>
           <div className="flex flex-row-reverse justify-between">
-            <Link
+            <button
               onClick={() => {
                 sessionStorage.clear();
-                removeCookie();
+                cookies.remove("token", { path: "/" });
+                cookies.remove("fullName", { path: "/" });
+                navigate("/");
               }}
-              to={"/"}
+              className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]"
             >
-              <button className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]">
-                خروج
-              </button>
-            </Link>
+              خروج
+            </button>
             <button
               onClick={toggleModslStatusHandler}
               className="px-4 py-1 border-solid border-2 rounded-md border-[#003B7E]"

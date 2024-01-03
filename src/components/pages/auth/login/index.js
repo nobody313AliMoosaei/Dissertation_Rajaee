@@ -40,12 +40,22 @@ const Login = () => {
 
     if (response.status === 200) {
       setCookies("token", response.data.token);
-      toast.success("با موفقیت وارد شدید");
-      navigate(`/${response.data.role}`);
+      setCookies("fullName", response.data.fullName);
+      setCookies("role", response.data.role);
+      console.log(response);
+      if (response.data.role === "Administrator") {
+        toast.error("اطلاعات وارد شده صحیح نمی باشد");
+      } else if (response.data.role === "Student") {
+        toast.success("با موفقیت وارد شدید");
+        navigate(`/${response.data.role}`);
+      } else {
+        toast.success("با موفقیت وارد شدید");
+        navigate("/employees");
+      }
     } else {
       //error occurre
-      console.log("response : ", response);
       toast.error("اطلاعات وارد شده صحیح نمی باشد");
+      console.log("response : ", response);
     }
 
     setIsLoading(false);
