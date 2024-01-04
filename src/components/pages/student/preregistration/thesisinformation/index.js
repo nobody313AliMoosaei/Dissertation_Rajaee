@@ -81,21 +81,19 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
     }
   }, []);
 
-  const notify = () =>
-    toast.error("اطلاعات کامل وارد نشده است!!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  const updateData = (e) => {
-    setThesisInformation({
-      ...thesisInformation,
-      [e.target.name]: e.target.value,
-    });
+  const notify = () => toast.error("اطلاعات کامل وارد نشده است!!");
+  const updateData = (e, v = 0) => {
+    if (v === 0) {
+      setThesisInformation({
+        ...thesisInformation,
+        [e.target.name]: e.target.value,
+      });
+    } else {
+      setThesisInformation({
+        ...thesisInformation,
+        [e.target.name]: e.target.value.replace(/[^A-Za-z]/gi, ""),
+      });
+    }
   };
 
   const handelStoreInformation = () => {
@@ -159,8 +157,10 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
               placeholder="عنوان پایان‌نامه را وارد کنید"
               name="Title_English"
               value={thesisInformation.Title_English || ""}
-              onChange={updateData}
+              onChange={(event) => updateData(event, -1)}
+              // onChange={updateData}
               type={"text"}
+              pattern="[A-Za-z]"
             />
           </div>
           <div className="flex flex-col md:col-span-2">

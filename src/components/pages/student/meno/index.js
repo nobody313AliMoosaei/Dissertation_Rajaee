@@ -77,7 +77,7 @@ const Meno = () => {
   const [isOpenNavbar, setIsOpenNavbar] = useState(false);
   const [isOpenmodalExit, setIsOpenmodalExit] = useState(false);
   const cookies = new Cookies();
-  const [token, setCookie, removeCookie] = useState(cookies.get("token"));
+  // const [token, setCookie, removeCookie] = useState(cookies.get("token"));
   const navigate = useNavigate();
 
   const toggleNavbarStatusHandler = () => {

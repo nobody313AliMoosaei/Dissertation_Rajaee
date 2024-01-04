@@ -18,3 +18,8 @@ export async function PostUserDataSignUp({ userName, nationalCode, email }) {
   });
   return apiCall;
 }
+
+export async function GetLogOut() {
+  const apiCall = await useFetch().post(`/SignUp/LogOut`);
+  return apiCall;
+}

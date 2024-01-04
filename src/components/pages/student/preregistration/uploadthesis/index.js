@@ -161,7 +161,7 @@ const UploadThesis = ({
                   <input
                     onChange={(e) => changeHandler(e)}
                     id="thesis"
-                    accept=".rar , .zip , .pdf , .docx"
+                    accept=".rar , .zip"
                     type="file"
                     className="hidden"
                   />

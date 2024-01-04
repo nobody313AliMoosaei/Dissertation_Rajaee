@@ -41,7 +41,7 @@ const SignUp = () => {
       navigate("/login");
     } else {
       //error occurre
-      toast.error("اطلاعات ثبت نشد");
+      toast.error(response.data.errorList[response.data.errorList.length - 1]);
       console.log("response : ", response);
     }
 
@@ -95,7 +95,7 @@ const SignUp = () => {
             className={"bg-[#003B7E]"}
             action={asyncPostUserData}
             isLoading={isLoading}
-            text="ورود به سامانه"
+            text="ثبت نام"
           />
           <ToastContainer />
           <div className="mt-5">

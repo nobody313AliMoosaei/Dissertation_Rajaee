@@ -19,6 +19,7 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSelectTeacher1, setIsSelectTeacher1] = useState(true);
   const [isSelectTeacher2, setIsSelectTeacher2] = useState(true);
+  const [isSelectColleges, setIsSelectColleges] = useState(false);
 
   const updateData = (e) => {
     setInformation({
@@ -185,7 +186,10 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
           <div className="flex flex-col md:col-span-6">
             <span className="sm:text-base font-medium text-sm">دانشکده</span>
             <select
-              onChange={filterteachers}
+              onChange={(e) => {
+                filterteachers(e);
+                setIsSelectColleges(true);
+              }}
               name="collegeRef"
               value={information.collegeRef || ""}
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
@@ -206,6 +210,7 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
             </span>
             <select
               name="Teacher_1"
+              disabled={!isSelectColleges}
               value={information.Teacher_1 || ""}
               onChange={(e) => {
                 updateData(e);

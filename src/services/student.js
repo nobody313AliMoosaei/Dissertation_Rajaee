@@ -60,7 +60,6 @@ export async function UploadDissertation({ formData, data, token }) {
   formData.append("FirstName", data.firsName);
   formData.append("CollegeRef", data.collegeRef);
   formData.append("Abstract", data.Abstract);
-  formData.append("Email", "alimahjub.138064m@gmail.com");
   if (data.Teacher_2) {
     formData.append("Teacher_2", data.Teacher_2);
   }

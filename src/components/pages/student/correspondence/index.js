@@ -78,6 +78,7 @@ const Correspondence = () => {
       //check repsonse status
       if (response.status === 200) {
         console.log(response.data);
+        asyncGetAllComments(data.dissertationId);
       } else {
         //error occure
       }
