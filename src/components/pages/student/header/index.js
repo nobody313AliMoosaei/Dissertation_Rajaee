@@ -43,7 +43,15 @@ const Header = () => {
           </p>
           <div className="flex flex-row-reverse justify-between">
             <Link to={"/"}>
-              <button className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]">
+              <button
+                onClick={() => {
+                  sessionStorage.clear();
+                  cookies.remove("token", { path: "/" });
+                  cookies.remove("fullName", { path: "/" });
+                  cookies.remove("role", { path: "/" });
+                }}
+                className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]"
+              >
                 خروج
               </button>
             </Link>

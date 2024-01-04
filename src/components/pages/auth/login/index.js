@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -6,14 +6,14 @@ import ReCAPTCHA from "react-google-recaptcha";
 //Services
 import { PostUserData } from "../../../../services/auth";
 //cookie
-import { useCookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 //Components
 import LoadingBtn from "../../../common/loadingBtn";
 
 const Login = () => {
-  const [cookies, setCookies] = useCookies(["token"]);
+  const cookies = new Cookies();
   const navigate = useNavigate();
-
+  const recaptcha = useRef();
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,34 +28,38 @@ const Login = () => {
   const asyncPostUserData = async () => {
     setIsLoading(true);
     setError({});
-
     const { userName, password } = dataLogin;
-
-    const response = await PostUserData({
-      userName,
-      password,
-    });
-
-    // console.log("response : ", response.status);
-
-    if (response.status === 200) {
-      setCookies("token", response.data.token);
-      setCookies("fullName", response.data.fullName);
-      setCookies("role", response.data.role);
-      console.log(response);
-      if (response.data.role === "Administrator") {
-        toast.error("اطلاعات وارد شده صحیح نمی باشد");
-      } else if (response.data.role === "Student") {
-        toast.success("با موفقیت وارد شدید");
-        navigate(`/${response.data.role}`);
-      } else {
-        toast.success("با موفقیت وارد شدید");
-        navigate("/employees");
-      }
+    const captchaValue = recaptcha.current.getValue();
+    if (!captchaValue) {
+      toast.error("برار سرد و گرمم ثابت کن ربات نیستی");
     } else {
-      //error occurre
-      toast.error("اطلاعات وارد شده صحیح نمی باشد");
-      console.log("response : ", response);
+      // make form submission
+      const response = await PostUserData({
+        userName,
+        password,
+      });
+
+      // console.log("response : ", response.status);
+
+      if (response.status === 200) {
+        cookies.set("token", response.data.token);
+        cookies.set("fullName", response.data.fullName);
+        cookies.set("role", response.data.role);
+        console.log(response);
+        if (response.data.role === "Administrator") {
+          toast.error("اطلاعات وارد شده صحیح نمی باشد");
+        } else if (response.data.role === "Student") {
+          toast.success("با موفقیت وارد شدید");
+          navigate(`/${response.data.role}`);
+        } else {
+          toast.success("با موفقیت وارد شدید");
+          navigate("/employees");
+        }
+      } else {
+        //error occurre
+        toast.error("اطلاعات وارد شده صحیح نمی باشد");
+        console.log("response : ", response);
+      }
     }
 
     setIsLoading(false);
@@ -90,7 +94,10 @@ const Login = () => {
               type={"password"}
             />
           </div>
-          <ReCAPTCHA sitekey="6LcnubclAAAAABYr52Z02fiCaWrT-Cyc-3W4N-z8" />
+          <ReCAPTCHA
+            ref={recaptcha}
+            sitekey="6LcnubclAAAAABYr52Z02fiCaWrT-Cyc-3W4N-z8"
+          />
           <LoadingBtn
             className={"bg-[#003B7E]"}
             action={asyncPostUserData}

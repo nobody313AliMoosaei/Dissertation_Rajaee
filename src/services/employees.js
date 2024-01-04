@@ -1,6 +1,15 @@
 import useFetch from "./../hooks/useFetch";
 import useFetchGeneral from "./../hooks/useFetch2";
 
+export async function GetRefreshToken(token) {
+  const apiCall = await useFetch().get("/OtherEmployees/IsValidUser", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return apiCall;
+}
+
 export async function GetSelfDissertationAutomatic(
   token,
   pageNumber,
@@ -8,7 +17,7 @@ export async function GetSelfDissertationAutomatic(
 ) {
   console.log(pageNumber);
   const apiCall = await useFetch().get(
-    `/OtherEmployees/GetSelfDissertationAutomatic?PageNumber=${pageNumber}&PageSize=${pageSize}`,
+    `/OtherEmployees/GetSelfDissertationOfTeacherAutomatic?PageNumber=${pageNumber}&PageSize=${pageSize}`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -56,7 +65,6 @@ export async function SendComment(token, userId, dissertationId, title, dsr) {
   const apiCall = await useFetch().post(
     "/OtherEmployees/SendComment",
     {
-      userId: userId,
       dissertationId: dissertationId,
       title: title,
       dsr: dsr,

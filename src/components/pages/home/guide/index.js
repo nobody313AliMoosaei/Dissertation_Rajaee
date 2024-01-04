@@ -34,6 +34,31 @@ const Guide = () => {
           <span>گام سوم</span>
           <span className="text-lg font-bold">آپلود فایل پایان نامه</span>
         </div>
+        <div className="flex flex-col items-center gap-5 bg-[#fff] p-5 rounded-md w-60">
+          <div className="p-4 bg-[#5e81d129] rounded-full">
+            <Pen className="" />
+          </div>
+          <span>گام چهارم</span>
+          <span className="text-lg font-bold">تایید استاد راهنما</span>
+        </div>
+        <div className="flex flex-col items-center gap-5 bg-[#fff] p-5 rounded-md w-60">
+          <div className="p-4 bg-[#5e81d129] rounded-full">
+            <Pen className="" />
+          </div>
+          <span>گام پنجم</span>
+          <span className="text-lg text-center font-bold">
+            تایید کارشناس امور پایان‌نامه
+          </span>
+        </div>
+        <div className="flex flex-col items-center gap-5 bg-[#fff] p-5 rounded-md w-60">
+          <div className="p-4 bg-[#5e81d129] rounded-full">
+            <Pen className="" />
+          </div>
+          <span>گام ششم</span>
+          <span className="text-lg text-center font-bold">
+            تایید کار شناس تحصیلات تکمیلی
+          </span>
+        </div>
       </div>
     </div>
   );

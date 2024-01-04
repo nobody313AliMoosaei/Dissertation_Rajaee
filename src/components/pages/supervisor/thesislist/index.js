@@ -23,7 +23,7 @@ const ThesisList = ({}) => {
   // const [indexList, setIndexList] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const cookies = new Cookies();
-  const [token, setCookie] = useState(cookies.get("token"));
+  const token = cookies.get("token");
   const role = cookies.get("role");
 
   useEffect(() => {

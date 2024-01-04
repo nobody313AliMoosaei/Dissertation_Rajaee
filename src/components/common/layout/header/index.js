@@ -50,17 +50,23 @@ const Header = () => {
               {/* <ArrowDown className="w-5" /> */}
             </span>
           </Link>
-          <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
-            اخبار و اطلاعیه ها
-            {/* <ArrowDown className="w-5" /> */}
-          </span>{" "}
-          <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
-            راهنمای دانشجویان
-            {/* <ArrowDown className="w-5" /> */}
-          </span>
-          <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
-            نمونه پایان‌نامه
-          </span>
+          <Link to={"/news"}>
+            <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+              اخبار و اطلاعیه ها
+              {/* <ArrowDown className="w-5" /> */}
+            </span>{" "}
+          </Link>
+          <Link to={"/help"}>
+            <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+              راهنمای دانشجویان
+              {/* <ArrowDown className="w-5" /> */}
+            </span>
+          </Link>
+          <Link to={"/disertation"}>
+            <span className="flex items-center gap-x-2 hover:text-[#003B7E] duration-150 hover:cursor-pointer">
+              نمونه پایان‌نامه
+            </span>
+          </Link>
         </div>
         <div className="flex justify-left items-center gap-x-7 xl:gap-x-10 py-3 text-[#52575C]">
           <button

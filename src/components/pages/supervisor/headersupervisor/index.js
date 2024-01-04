@@ -14,7 +14,7 @@ const HeaderSupervisor = () => {
   const [isOpenmodalExit, setIsOpenmodalExit] = useState(false);
   const [scrollPosition, setScrollPosition] = useState();
   const cookies = new Cookies();
-  const [fullName, setCookie] = useState(cookies.get("fullName"));
+  const fullName = cookies.get("fullName");
 
   useEffect(() => {
     window.addEventListener("scroll", listenToScroll);
@@ -55,6 +55,7 @@ const HeaderSupervisor = () => {
                 onClick={() => {
                   cookies.remove("token", { path: "/" });
                   cookies.remove("fullName", { path: "/" });
+                  cookies.remove("role", { path: "/" });
                 }}
                 className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]"
               >

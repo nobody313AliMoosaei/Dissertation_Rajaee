@@ -20,16 +20,20 @@ import ThesisDetails from "./components/pages/supervisor/thesisdetails";
 import News from "./pages/news";
 import DetailNews from "./components/pages/news/detailNews";
 import Forms from "./components/pages/student/form";
+import Help from "./pages/help";
+import NotFound from "./components/common/notFound";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<SignUp />} />
           <Route path="/news" element={<News />} />
+          <Route path="/help" element={<Help />} />
           <Route path="/news/detail/:id" element={<DetailNews />} />
         </Route>
         {/* route for student  */}

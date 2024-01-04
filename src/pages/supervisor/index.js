@@ -4,17 +4,17 @@ import HeaderSupervisor from "../../components/pages/supervisor/headersupervisor
 import ThesisDetails from "../../components/pages/supervisor/thesisdetails";
 import ThesisList from "../../components/pages/supervisor/thesislist";
 import { Cookies } from "react-cookie";
-import { GetRefreshToken } from "../../services/student";
 import { toast } from "react-toastify";
+import { GetRefreshToken } from "../../services/employees";
 
 const Supervisor = () => {
   const [isLogin, setIsLogin] = useState(true);
   const cookies = new Cookies();
-  const [token, setCookie] = useState(cookies.get("token"));
+  const token = cookies.get("token");
   const navigate = useNavigate();
 
   useEffect(() => {
-    // asyncRefreshToken();
+    asyncRefreshToken();
   }, []);
   const asyncRefreshToken = async () => {
     const response = await GetRefreshToken(token);

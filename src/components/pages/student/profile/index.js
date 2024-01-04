@@ -1,39 +1,96 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Cookies } from "react-cookie";
+import { GetUserAutomatic, UpdateUser } from "../../../../services/student";
+import Loding from "../../../common/loding";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const [isOpenmodalEdit, setIsOpenmodalEdit] = useState(false);
-  const toggleModslStatusHandler = () => {
-    setIsOpenmodalEdit(!isOpenmodalEdit);
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState({});
+  const [dataEdit, setDataEdit] = useState({});
+  const cookies = new Cookies();
+  useEffect(() => {
+    asyncGetUserAutomatic();
+  }, []);
+  const asyncGetUserAutomatic = async () => {
+    setIsLoading(true);
+    const token = cookies.get("token");
+    try {
+      const response = await GetUserAutomatic(token);
+
+      //check repsonse status
+      if (response.status === 200) {
+        setData(response.data);
+        setDataEdit(response.data);
+        console.log(response);
+
+        // console.log(dissertationData);
+      } else {
+        //error occure
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
   };
-  const information = [
-    {
-      name: "علی",
-      family: "محجوب",
-      studentNumber: "3981231095",
-      college: "کامپیوتر",
-      supervisor: "استاد صفخانی",
-      term: "3",
-      Email: "ali@gamil.com",
-    },
-  ];
-  const options = [
-    {
-      label: "Mango",
-      value: "mango",
-    },
-    {
-      label: "Apple",
-      value: "apple",
-    },
-    {
-      label: "Banana",
-      value: "banana",
-    },
-    {
-      label: "Pineapple",
-      value: "pineapple",
-    },
-  ];
+  const asyncUpdateUser = async () => {
+    if (dataEdit.email === "") {
+      toast.error("ایمیل باید حتما وارد شود");
+    } else {
+      setIsLoading(true);
+      const token = cookies.get("token");
+      try {
+        const response = await UpdateUser(token, dataEdit);
+        //check repsonse status
+        if (response.status === 200) {
+          console.log(response);
+          toast.success("تغییرات با موفقیت ثبت شد.");
+          cookies.set("fullName", dataEdit.firsName + " " + dataEdit.lastName);
+          setIsOpenmodalEdit(false);
+          // console.log(dissertationData);
+        } else {
+          //error occure
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      setIsLoading(false);
+    }
+  };
+
+  const updateData = (e) => {
+    setDataEdit({ ...dataEdit, [e.target.name]: e.target.value });
+  };
+  // const information = [
+  //   {
+  //     name: "علی",
+  //     family: "محجوب",
+  //     studentNumber: "3981231095",
+  //     college: "کامپیوتر",
+  //     supervisor: "استاد صفخانی",
+  //     term: "3",
+  //     Email: "ali@gamil.com",
+  //   },
+  // ];
+  // const options = [
+  //   {
+  //     label: "Mango",
+  //     value: "mango",
+  //   },
+  //   {
+  //     label: "Apple",
+  //     value: "apple",
+  //   },
+  //   {
+  //     label: "Banana",
+  //     value: "banana",
+  //   },
+  //   {
+  //     label: "Pineapple",
+  //     value: "pineapple",
+  //   },
+  // ];
   return (
     <div>
       <div className="flex justify-center mt-10 gap-0 rounded-md">
@@ -41,38 +98,50 @@ const Profile = () => {
           <div className="mb-3 text-[#003B7E] font-medium">
             <span>اطلاعات دانشجو</span>
           </div>
-          <div className="grid lg:grid-cols-3 lg:gap-y-8 lg:gap-x-3 md:grid-cols-2 gap-y-8 gap-x-6 sm:grid-cols-1 ">
-            <div>
-              <span className="font-medium">نام :</span>
-              <span>{information[0].name}</span>
+          {isLoading ? (
+            <Loding />
+          ) : (
+            <div className="grid lg:grid-cols-3 lg:gap-y-8 lg:gap-x-3 md:grid-cols-2 gap-y-8 gap-x-6 sm:grid-cols-1 ">
+              <div>
+                <span className="font-medium">نام :</span>
+                <span>{data.firsName}</span>
+              </div>
+              <div>
+                <span className="font-medium">نام خانوادگی :</span>
+                <span>{data.lastName}</span>
+              </div>
+              <div>
+                <span className="font-medium">کدملی :</span>
+                <span>{data.nationalCode}</span>
+              </div>
+              <div>
+                <span className="font-medium">شماره دانشجویی :</span>
+                <span>{data.userName}</span>
+              </div>
+              <div>
+                <span className="font-medium">ایمیل:</span>
+                <span>{data.email}</span>
+              </div>
+              {/* <div>
+                <span className="font-medium">دانشکده :</span>
+                <span>{data.college}</span>
+              </div>
+              <div>
+                <span className="font-medium">استاد راهنما :</span>
+                <span>{data.supervisor}</span>
+              </div>
+              <div>
+                <span className="font-medium">ترم :</span>
+                <span>{data.term}</span>
+              </div>
+              <div>
+                <span className="font-medium">ایمیل :</span>
+                <span>{data.Email}</span>
+              </div> */}
             </div>
-            <div>
-              <span className="font-medium">نام خانوادگی :</span>
-              <span>{information[0].family}</span>
-            </div>
-            <div>
-              <span className="font-medium">شماره دانشجویی :</span>
-              <span>{information[0].studentNumber}</span>
-            </div>
-            <div>
-              <span className="font-medium">دانشکده :</span>
-              <span>{information[0].college}</span>
-            </div>
-            <div>
-              <span className="font-medium">استاد راهنما :</span>
-              <span>{information[0].supervisor}</span>
-            </div>
-            <div>
-              <span className="font-medium">ترم :</span>
-              <span>{information[0].term}</span>
-            </div>
-            <div>
-              <span className="font-medium">ایمیل :</span>
-              <span>{information[0].Email}</span>
-            </div>
-          </div>
+          )}
           <button
-            onClick={toggleModslStatusHandler}
+            onClick={() => setIsOpenmodalEdit(!isOpenmodalEdit)}
             className="text-[#003B7E] bg-[#5e81d128] w-fit self-end px-3 py-1 mt-5 rounded-md"
           >
             ویرایش
@@ -94,7 +163,9 @@ const Profile = () => {
                 نام{" "}
               </span>
               <input
-                value={information[0].name}
+                defaultValue={data.firsName || ""}
+                name="firsName"
+                onChange={updateData}
                 className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
                 placeholder="نام خود را وارد کنید"
                 type={"text"}
@@ -107,9 +178,25 @@ const Profile = () => {
               </span>
               <input
                 required
-                value={information[0].family}
+                onChange={updateData}
+                defaultValue={data.lastName || ""}
+                name="lastName"
                 className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
                 placeholder=" نام‌خانوادگی خود را وارد کنید"
+                type={"text"}
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="sm:text-base self-start font-medium text-sm">
+                کدملی
+              </span>
+              <input
+                required
+                onChange={updateData}
+                defaultValue={data.nationalCode || ""}
+                name="nationalCode"
+                className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
+                placeholder=" کدملی خود را وارد کنید"
                 type={"text"}
               />
             </div>
@@ -119,13 +206,29 @@ const Profile = () => {
               </span>
               <input
                 required
-                value={information[0].studentNumber}
+                onChange={updateData}
+                defaultValue={data.userName || ""}
+                name="userName"
                 className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
                 placeholder=" شماره دانشجویی خود را وارد کنید"
                 type={"text"}
               />
             </div>
-            <div className="flex flex-col">
+            <div className="md:col-span-2 flex flex-col">
+              <span className="sm:text-base self-start font-medium text-sm">
+                ایمیل{" "}
+              </span>
+              <input
+                onChange={updateData}
+                defaultValue={data.email || ""}
+                name="email"
+                className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
+                placeholder="ایمیل خود را وارد کنید"
+                type={"text"}
+                required
+              />
+            </div>
+            {/* <div className="flex flex-col">
               <span className="sm:text-base font-medium text-sm self-start">
                 دانشکده
               </span>
@@ -178,17 +281,21 @@ const Profile = () => {
                 type={"text"}
                 required
               />
-            </div>
+            </div> */}
           </div>
           <div className="self-end flex gap-5">
             <button
-              onClick={toggleModslStatusHandler}
-              className="text-[#003B7E] bg-[#5e81d128] w-fit self-end px-3 py-1 mt-5 rounded-md"
+              onClick={() => {
+                asyncUpdateUser();
+              }}
+              className="text-[#003B7E] bg-[#5e81d128] h-8 w-fit self-end px-3 py-1 mt-5 rounded-md"
             >
-              ذخیره تغییرات
+              {isLoading ? <Loding className2={"hidden"} /> : "ذخیره تغییرات"}
             </button>
             <button
-              onClick={toggleModslStatusHandler}
+              onClick={() => {
+                setIsOpenmodalEdit(!isOpenmodalEdit);
+              }}
               className="text-[#003B7E] bg-[#5e81d128] w-fit self-end px-3 py-1 mt-5 rounded-md"
             >
               بستن

@@ -14,6 +14,7 @@ import {
 } from "../../../../../services/student";
 //Cookies
 import { Cookies } from "react-cookie";
+import Loding from "../../../../common/loding";
 
 const UploadThesis = ({
   stepForwardHandler,
@@ -22,6 +23,7 @@ const UploadThesis = ({
 }) => {
   const [dissertationFile, setDissertationFile] = useState();
   const [proceedingsFile, setProceedingsFile] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({});
   const cookies = new Cookies();
   const [token, setCookie] = useState(cookies.get("token"));
@@ -73,7 +75,7 @@ const UploadThesis = ({
     const formData = new FormData();
     formData.append("DissertationFile", dissertationFile);
     formData.append("ProFile", proceedingsFile);
-
+    setIsLoading(true);
     try {
       var response;
       if (dis_Id !== -1) {
@@ -92,7 +94,7 @@ const UploadThesis = ({
       }
 
       if (response.status === 200) {
-        console.log("با موفیت ثبت شد");
+        toast.success("با موفیت ثبت شد");
         stepForwardHandler();
       } else {
         console.log(response);
@@ -101,6 +103,7 @@ const UploadThesis = ({
     } catch (error) {
       console.log("error in upload dissertation : ", error);
     }
+    setIsLoading(false);
   };
 
   const handelStoreInformation = () => {
@@ -214,7 +217,7 @@ const UploadThesis = ({
             onClick={handelStoreInformation}
             className="bg-[#003b7e29] sm:px-4 self-end p-2 mt-6 rounded-md text-lg text-[#003B7E]"
           >
-            ثبت نهایی
+            {isLoading ? <Loding className2={"hidden"} /> : "ثبت نهایی"}
           </button>
           <ToastContainer bodyClassName="toast-message" />
         </div>

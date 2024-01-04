@@ -68,7 +68,7 @@ const ThesisStatus = () => {
           </span>
           <span className={``}>تایید استاد راهنما</span>
         </div>
-        <div>
+        {/* <div>
           <span
             className={` ${
               status >= 4 ? "bg-[#037724]" : "bg-[#fff]"
@@ -78,28 +78,28 @@ const ThesisStatus = () => {
             3
           </span>
           <span className={``}> تایید کارشناس اموزش</span>
-        </div>
+        </div> */}
         <div>
           <span
             className={` ${
               status >= 5 ? "bg-[#037724]" : "bg-[#fff]"
+            } px-2 ml-2 rounded-full
+                    `}
+          >
+            3
+          </span>
+          <span className={``}> تایید کارشناس امور پایان‌نامه</span>
+        </div>
+        <div>
+          <span
+            className={` ${
+              status === 5 ? "bg-[#037724]" : "bg-[#fff]"
             } px-2 ml-2 rounded-full
               `}
           >
             4
           </span>
           <span className={``}> تایید کارشناس تحصیلات تکمیلی</span>
-        </div>
-        <div>
-          <span
-            className={` ${
-              status >= 6 ? "bg-[#037724]" : "bg-[#fff]"
-            } px-2 ml-2 rounded-full
-              `}
-          >
-            5
-          </span>
-          <span className={``}> تایید کارشناس امور پایان‌نامه</span>
         </div>
       </div>
       {isLoading ? (

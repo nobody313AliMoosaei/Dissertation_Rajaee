@@ -15,8 +15,8 @@ import {
 } from "../../../../services/employees";
 import { Cookies } from "react-cookie";
 import Loding from "../../../common/loding";
-import { Pagination } from "swiper";
 import Pagination2 from "../../../common/pagination2";
+import { toast } from "react-toastify";
 
 // const information = [
 //   {
@@ -79,9 +79,8 @@ const ThesisDetails = ({}) => {
   const [sendComment, setSendComment] = useState({});
   const [pageNumber, setPageNumber] = useState(1);
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
-
   const cookies = new Cookies();
-  const [token, setCookie] = useState(cookies.get("token"));
+  const token = cookies.get("token");
   const { id } = useParams();
   const updateData = (e) => {
     setSendComment({
@@ -116,8 +115,8 @@ const ThesisDetails = ({}) => {
     const response = await GetAllDissertationOfUesr(id);
 
     if (response.status === 200) {
-      console.log(response.data[0].dissertationId);
-      setDissertationData({ ...response.data[0] });
+      // console.log(response.data[0].dissertationId);
+      setDissertationData({ ...response.data[response.data.length - 1] });
       // console.log(dissertationData);
     } else {
       //error occurre
@@ -125,7 +124,7 @@ const ThesisDetails = ({}) => {
     }
 
     setIsLoading(false);
-    asyncGetAllComments(response.data[0].dissertationId);
+    asyncGetAllComments(response.data[response.data.length - 1].dissertationId);
   };
 
   const asyncSendComment = async () => {
@@ -142,7 +141,7 @@ const ThesisDetails = ({}) => {
 
       //check repsonse status
       if (response.status === 200) {
-        console.log(response.data);
+        // console.log(response.data);
         setSendComment({});
       } else {
         //error occure
@@ -207,31 +206,56 @@ const ThesisDetails = ({}) => {
   const asyncCahngeDissertationStatus = async (status) => {
     const role = cookies.get("role");
     if (status === 0) {
-      if (role === "GuideMaster") {
+      if (role === "GuideMaster" && dissertationData.statusDissertation === 0) {
         status = 13;
-      } else if (role === "DissertationExpert") {
+      } else if (
+        role === "DissertationExpert" &&
+        dissertationData.statusDissertation === 1
+      ) {
         status = 18;
-      } else {
+      } else if (
+        role === "PostgraduateEducationExpert" &&
+        dissertationData.statusDissertation === 6
+      ) {
         status = 17;
-      }
-    }
-    setIsLoadingBtn(true);
-    try {
-      const response = await CahngeDissertationStatus(
-        token,
-        dissertationData.dissertationId,
-        status
-      );
-      //check repsonse status
-      if (response.status === 200) {
-        console.log(response);
       } else {
-        //error occure
+        status = -1;
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      if (
+        (role === "GuideMaster" && dissertationData.statusDissertation === 0) ||
+        (role === "DissertationExpert" &&
+          dissertationData.statusDissertation === 1) ||
+        (role === "PostgraduateEducationExpert" &&
+          dissertationData.statusDissertation === 6)
+      ) {
+        status = -3333;
+      } else {
+        status = -1;
+      }
     }
-    setIsLoadingBtn(false);
+    if (status !== -1) {
+      setIsLoadingBtn(true);
+      try {
+        const response = await CahngeDissertationStatus(
+          token,
+          dissertationData.dissertationId,
+          status
+        );
+        //check repsonse status
+        if (response.status === 200) {
+          console.log(response);
+          toast.success("تغییر وضعیت با موفقیت انجام شد.");
+        } else {
+          //error occure
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      setIsLoadingBtn(false);
+    } else {
+      toast.warning("در حال حاضر امکان تغییر وضعیت برای شما وجود ندارد");
+    }
   };
   return (
     <>
@@ -306,7 +330,7 @@ const ThesisDetails = ({}) => {
               <div>
                 <span className="font-medium">استاد راهنما :</span>
                 <span className="text-[#B0B9BE] text-lg">
-                  {userData.teachersName}
+                  {userData.teachersName + ""}
                 </span>
               </div>
               <div>
@@ -389,16 +413,32 @@ const ThesisDetails = ({}) => {
               </div>
               <div className="flex md:flex-row md:gap-5 flex-col">
                 <button
+                  disabled={
+                    isLoadingBtn ||
+                    dissertationData.statusDissertation === -3333
+                      ? true
+                      : false
+                  }
                   onClick={() => asyncCahngeDissertationStatus(-3333)}
-                  className="text-[#2080F6] border-2 sm:px-4 self-start p-2 mt-6 rounded-md text-lg border-[#2080f6] "
+                  className="text-[#f62020] border-2 sm:px-4 self-start p-2 mt-6 rounded-md text-lg border-[#f62020] "
                 >
                   عدم تایید پایان‌نامه
                 </button>
                 <button
+                  disabled={
+                    isLoadingBtn ||
+                    dissertationData.statusDissertation === -3333
+                      ? true
+                      : false
+                  }
                   onClick={() => asyncCahngeDissertationStatus(0)}
-                  className="bg-[#2080F6] border-2 sm:px-4 self-start p-2 mt-6 rounded-md text-lg text-[#fff]"
+                  className="bg-[#2080F6] border-2 sm:px-4 self-start w-40 p-2 mt-6 rounded-md text-lg text-[#fff]"
                 >
-                  تایید پایان‌نامه
+                  {isLoadingBtn ? (
+                    <Loding className2={"hidden"} />
+                  ) : (
+                    "تایید پایان‌نامه"
+                  )}
                 </button>
               </div>
             </div>

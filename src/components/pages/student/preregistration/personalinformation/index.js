@@ -113,10 +113,10 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
   const handelStoreInformation = () => {
     // console.log(information);
     if (
-      information.FirstName === "" ||
-      information.LastName === "" ||
+      information.firsName === "" ||
+      information.lastName === "" ||
       information.Term_Number === "" ||
-      information.College === "" ||
+      information.collegeRef === "" ||
       information.Teacher_1 === "" ||
       Object.keys(information).length < 5
     ) {
@@ -151,8 +151,8 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
               placeholder="نام خود را وارد کنید"
               type={"text"}
-              name="FirstName"
-              value={information.FirstName || ""}
+              name="firsName"
+              value={information.firsName || ""}
               required
             />
           </div>
@@ -166,8 +166,8 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
               placeholder=" نام‌خانوادگی خود را وارد کنید"
               type={"text"}
-              value={information.LastName || ""}
-              name="LastName"
+              value={information.lastName || ""}
+              name="lastName"
             />
           </div>
           <div className="flex flex-col md:col-span-2">
@@ -186,8 +186,8 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
             <span className="sm:text-base font-medium text-sm">دانشکده</span>
             <select
               onChange={filterteachers}
-              name="CollegeRef"
-              value={information.CollegeRef || ""}
+              name="collegeRef"
+              value={information.collegeRef || ""}
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
             >
               <option disabled selected value="">
