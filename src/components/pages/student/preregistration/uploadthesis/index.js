@@ -75,7 +75,7 @@ const UploadThesis = ({
     formData.append("DissertationFile", dissertationFile);
     formData.append("ProFile", proceedingsFile);
     setIsLoading(true);
-    
+
     try {
       var response;
       if (dis_Id !== -1) {
@@ -83,14 +83,10 @@ const UploadThesis = ({
           formData,
           data,
           cookies.token,
-          dis_Id,
+          dis_Id
         );
       } else {
-        response = await UploadDissertation(
-          formData,
-          data,
-          cookies.token,
-        );
+        response = await UploadDissertation(formData, data, cookies.token);
       }
 
       if (response.status === 200) {
@@ -161,7 +157,7 @@ const UploadThesis = ({
                   <input
                     onChange={(e) => changeHandler(e)}
                     id="thesis"
-                    accept=".rar , .zip"
+                    accept=".rar , .zip , .pdf , .docx"
                     type="file"
                     className="hidden"
                   />

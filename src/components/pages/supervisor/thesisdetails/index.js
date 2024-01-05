@@ -183,7 +183,7 @@ const ThesisDetails = ({}) => {
       if (response.status === 200) {
         // console.log(response);
         const file = new Blob([response.data], {
-          type: fileType,
+          type: response.headers["content-type"],
         });
         const url = window.URL.createObjectURL(file);
         console.log(url);

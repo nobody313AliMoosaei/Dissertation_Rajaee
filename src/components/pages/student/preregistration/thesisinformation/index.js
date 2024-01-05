@@ -91,7 +91,7 @@ const ThesisInformation = ({ stepBackwardHandler, stepForwardHandler }) => {
     } else {
       setThesisInformation({
         ...thesisInformation,
-        [e.target.name]: e.target.value.replace(/[^A-Za-z]/gi, ""),
+        [e.target.name]: e.target.value.replace(/[^A-Za-z]/gi, " "),
       });
     }
   };
