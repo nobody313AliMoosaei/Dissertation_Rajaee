@@ -5,14 +5,13 @@ import {
   GetStatusDisertation,
 } from "../../../../services/student";
 //Cookies
-import { Cookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 import Loding from "../../../common/loding";
 
 const ThesisStatus = () => {
   const [status, setStatus] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const cookies = new Cookies();
-  const [token, setCookie] = useState(cookies.get("token"));
+  const [cookies] = useCookies(["token"]);
 
   useEffect(() => {
     asyncGetStatusDisertation();
@@ -21,7 +20,7 @@ const ThesisStatus = () => {
   const asyncGetStatusDisertation = async () => {
     setIsLoading(true);
     try {
-      const response = await GetStatusDisertation(token);
+      const response = await GetStatusDisertation(cookies.token);
 
       //check repsonse status
       if (response.status === 200) {

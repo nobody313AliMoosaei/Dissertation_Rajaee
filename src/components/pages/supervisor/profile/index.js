@@ -3,8 +3,9 @@ import { Cookies, useCookies } from "react-cookie";
 import { GetUserAutomatic, UpdateUser } from "../../../../services/student";
 import Loding from "../../../common/loding";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
-const Profile = () => {
+const ProfileEm = () => {
   const [isOpenmodalEdit, setIsOpenmodalEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({});
@@ -15,6 +16,7 @@ const Profile = () => {
   }, []);
   const asyncGetUserAutomatic = async () => {
     setIsLoading(true);
+
     try {
       const response = await GetUserAutomatic(cookies.token);
 
@@ -46,6 +48,8 @@ const Profile = () => {
           asyncGetUserAutomatic();
           console.log(response);
           toast.success("تغییرات با موفقیت ثبت شد.");
+          //   cookies.set("fullName", dataEdit.firsName + " " + dataEdit.lastName);
+          // console.log(dissertationData);
         } else {
           console.log(response);
           toast.error(response.data.message);
@@ -94,8 +98,9 @@ const Profile = () => {
     <div>
       <div className="flex justify-center mt-10 gap-0 rounded-md">
         <div className="w-11/12 bg-[#fff] p-8 flex flex-col justify-center ">
-          <div className="mb-3 text-[#003B7E] font-medium">
-            <span>اطلاعات دانشجو</span>
+          <div className="flex justify-between mb-3 text-[#003B7E] font-medium">
+            <span>اطلاعات کاربر</span>
+            <Link to={"/employees"}>بازگشت</Link>
           </div>
           {isLoading ? (
             <Loding />
@@ -114,13 +119,13 @@ const Profile = () => {
                 <span>{data.nationalCode}</span>
               </div>
               <div>
-                <span className="font-medium">شماره دانشجویی :</span>
+                <span className="font-medium">کد پرسنلی :</span>
                 <span>{data.userName}</span>
               </div>
-              <div>
+              {/* <div>
                 <span className="font-medium">ایمیل:</span>
                 <span>{data.email}</span>
-              </div>
+              </div> */}
               {/* <div>
                 <span className="font-medium">دانشکده :</span>
                 <span>{data.college}</span>
@@ -139,12 +144,12 @@ const Profile = () => {
               </div> */}
             </div>
           )}
-          <button
+          {/* <button
             onClick={() => setIsOpenmodalEdit(!isOpenmodalEdit)}
             className="text-[#003B7E] bg-[#5e81d128] w-fit self-end px-3 py-1 mt-5 rounded-md"
           >
             ویرایش
-          </button>
+          </button> */}
         </div>
       </div>
       <div
@@ -201,7 +206,7 @@ const Profile = () => {
             </div>
             <div className="flex flex-col">
               <span className="sm:text-base self-start font-medium text-sm">
-                شماره دانشجویی
+                کد پرسنلی
               </span>
               <input
                 required
@@ -209,11 +214,11 @@ const Profile = () => {
                 defaultValue={data.userName || ""}
                 name="userName"
                 className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
-                placeholder=" شماره دانشجویی خود را وارد کنید"
+                placeholder=" کد پرسنلی خود را وارد کنید"
                 type={"text"}
               />
             </div>
-            <div className="md:col-span-2 flex flex-col">
+            {/* <div className="md:col-span-2 flex flex-col">
               <span className="sm:text-base self-start font-medium text-sm">
                 ایمیل{" "}
               </span>
@@ -226,7 +231,7 @@ const Profile = () => {
                 type={"text"}
                 required
               />
-            </div>
+            </div> */}
             {/* <div className="flex flex-col">
               <span className="sm:text-base font-medium text-sm self-start">
                 دانشکده
@@ -306,4 +311,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileEm;

@@ -13,7 +13,7 @@ import {
   UploadUpdateDissertation,
 } from "../../../../../services/student";
 //Cookies
-import { Cookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 import Loding from "../../../../common/loding";
 
 const UploadThesis = ({
@@ -25,8 +25,7 @@ const UploadThesis = ({
   const [proceedingsFile, setProceedingsFile] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({});
-  const cookies = new Cookies();
-  const [token, setCookie] = useState(cookies.get("token"));
+  const [cookies] = useCookies(["token"]);
 
   const changeHandler = (event) => {
     if (event.target.id === "thesis") {
@@ -76,21 +75,22 @@ const UploadThesis = ({
     formData.append("DissertationFile", dissertationFile);
     formData.append("ProFile", proceedingsFile);
     setIsLoading(true);
+    
     try {
       var response;
       if (dis_Id !== -1) {
-        response = await UploadUpdateDissertation({
+        response = await UploadUpdateDissertation(
           formData,
           data,
-          token,
+          cookies.token,
           dis_Id,
-        });
+        );
       } else {
-        response = await UploadDissertation({
+        response = await UploadDissertation(
           formData,
           data,
-          token,
-        });
+          cookies.token,
+        );
       }
 
       if (response.status === 200) {

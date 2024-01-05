@@ -11,7 +11,6 @@ import { ReactComponent as Writerinformation } from "../../../../assets/svg/writ
 import { ReactComponent as Profile } from "../../../../assets/svg/profile-circle2.svg";
 //PNG
 import Logo from "../../../../assets/image/logo.png";
-import { Cookies } from "react-cookie";
 
 const urls_menu = [
   {
@@ -76,9 +75,6 @@ const Meno = () => {
   let location = useLocation();
   const [isOpenNavbar, setIsOpenNavbar] = useState(false);
   const [isOpenmodalExit, setIsOpenmodalExit] = useState(false);
-  const cookies = new Cookies();
-  // const [token, setCookie, removeCookie] = useState(cookies.get("token"));
-  const navigate = useNavigate();
 
   const toggleNavbarStatusHandler = () => {
     setIsOpenNavbar(!isOpenNavbar);
@@ -101,18 +97,12 @@ const Meno = () => {
             آیا میخواهید از پنل کاربری خود خارج شوید؟
           </p>
           <div className="flex flex-row-reverse justify-between">
-            <button
-              onClick={() => {
-                sessionStorage.clear();
-                cookies.remove("token", { path: "/" });
-                cookies.remove("fullName", { path: "/" });
-                cookies.remove("role", { path: "/" });
-                navigate("/");
-              }}
+            <Link
+              to={"/student/logout"}
               className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]"
             >
               خروج
-            </button>
+            </Link>
             <button
               onClick={toggleModslStatusHandler}
               className="px-4 py-1 border-solid border-2 rounded-md border-[#003B7E]"

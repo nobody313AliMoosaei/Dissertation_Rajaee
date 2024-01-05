@@ -22,6 +22,9 @@ import DetailNews from "./components/pages/news/detailNews";
 import Forms from "./components/pages/student/form";
 import Help from "./pages/help";
 import NotFound from "./components/common/notFound";
+import ProfileEm from "./components/pages/supervisor/profile";
+import LogOut from "./components/common/logout";
+import Logout from "./components/common/logout";
 
 function App() {
   return (
@@ -46,10 +49,13 @@ function App() {
           <Route path="/student/thesisstatus" element={<ThesisStatus />} />
           <Route path="/student/correspondence" element={<Correspondence />} />
           <Route path="/student/profile" element={<Profile />} />
+          <Route path="/student/logout" element={<LogOut/>} />
         </Route>
         {/* route for Employees */}
         <Route path="employees" element={<Supervisor />}>
           <Route path="/employees" element={<ThesisList />} />
+          <Route path="/employees/logout" element={<Logout />} />
+          <Route path="/employees/profile" element={<ProfileEm />} />
           <Route path="/employees/detail/:id" element={<ThesisDetails />} />
         </Route>
       </Routes>

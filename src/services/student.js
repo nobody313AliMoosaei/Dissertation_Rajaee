@@ -49,9 +49,9 @@ export async function DownloadDissertation(addressFile) {
   return apiCall;
 }
 
-export async function UploadDissertation({ formData, data, token }) {
-  // formData.append("KeyWords_Persian", data.KeyWords_Persian);
-  // formData.append("KeyWords_English", data.KeyWords_English);
+export async function UploadDissertation( formData, data, token ) {
+  data.KeyWords_Persian.forEach((item) => formData.append("KeyWords", item));
+  data.KeyWords_English.forEach((item) => formData.append("KeyWords", item));
   formData.append("Title_Persian", data.Title_Persian);
   formData.append("Title_English", data.Title_English);
   formData.append("Term_Number", data.Term_Number);
@@ -81,6 +81,8 @@ export async function UploadUpdateDissertation({
   token,
   dis_Id,
 }) {
+  data.KeyWords_Persian.forEach((item) => formData.append("KeyWords", item));
+  data.KeyWords_English.forEach((item) => formData.append("KeyWords", item));
   data.KeyWords_Persian.map((item) => formData.append("KeyWords", item));
   data.KeyWords_English.map((item) => formData.append("KeyWords", item));
   formData.append("Title_Persian", data.Title_Persian);

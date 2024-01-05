@@ -13,7 +13,7 @@ import {
   GetUserById,
   SendComment,
 } from "../../../../services/employees";
-import { Cookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 import Loding from "../../../common/loding";
 import Pagination2 from "../../../common/pagination2";
 import { toast } from "react-toastify";
@@ -79,8 +79,7 @@ const ThesisDetails = ({}) => {
   const [sendComment, setSendComment] = useState({});
   const [pageNumber, setPageNumber] = useState(1);
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
-  const cookies = new Cookies();
-  const token = cookies.get("token");
+  const [cookies] = useCookies(["token", "role"]);
   const { id } = useParams();
   const updateData = (e) => {
     setSendComment({
@@ -132,7 +131,7 @@ const ThesisDetails = ({}) => {
     const { title, dsr } = sendComment;
     try {
       const response = await SendComment(
-        token,
+        cookies.token,
         userData.userId,
         dissertationData.dissertationId,
         title,
@@ -204,17 +203,19 @@ const ThesisDetails = ({}) => {
   };
 
   const asyncCahngeDissertationStatus = async (status) => {
-    const role = cookies.get("role");
     if (status === 0) {
-      if (role === "GuideMaster" && dissertationData.statusDissertation === 0) {
+      if (
+        cookies.role === "GuideMaster" &&
+        dissertationData.statusDissertation === 0
+      ) {
         status = 13;
       } else if (
-        role === "DissertationExpert" &&
+        cookies.role === "DissertationExpert" &&
         dissertationData.statusDissertation === 1
       ) {
         status = 18;
       } else if (
-        role === "PostgraduateEducationExpert" &&
+        cookies.role === "PostgraduateEducationExpert" &&
         dissertationData.statusDissertation === 6
       ) {
         status = 17;
@@ -223,10 +224,11 @@ const ThesisDetails = ({}) => {
       }
     } else {
       if (
-        (role === "GuideMaster" && dissertationData.statusDissertation === 0) ||
-        (role === "DissertationExpert" &&
+        (cookies.role === "GuideMaster" &&
+          dissertationData.statusDissertation === 0) ||
+        (cookies.role === "DissertationExpert" &&
           dissertationData.statusDissertation === 1) ||
-        (role === "PostgraduateEducationExpert" &&
+        (cookies.role === "PostgraduateEducationExpert" &&
           dissertationData.statusDissertation === 6)
       ) {
         status = -3333;
@@ -238,7 +240,7 @@ const ThesisDetails = ({}) => {
       setIsLoadingBtn(true);
       try {
         const response = await CahngeDissertationStatus(
-          token,
+          cookies.token,
           dissertationData.dissertationId,
           status
         );
@@ -411,7 +413,7 @@ const ThesisDetails = ({}) => {
                   دانلود صورت جلسه
                 </button>
               </div>
-              <div className="flex md:flex-row md:gap-5 flex-col">
+              <div className="flex md:flex-row md:gap-5 gap-2 flex-col">
                 <button
                   disabled={
                     isLoadingBtn ||
@@ -420,7 +422,7 @@ const ThesisDetails = ({}) => {
                       : false
                   }
                   onClick={() => asyncCahngeDissertationStatus(-3333)}
-                  className="text-[#f62020] border-2 sm:px-4 self-start p-2 mt-6 rounded-md text-lg border-[#f62020] "
+                  className="text-[#f62020] border-2 sm:px-4 self-start p-2 md:mt-6 mt-3 rounded-md text-lg border-[#f62020] "
                 >
                   عدم تایید پایان‌نامه
                 </button>
@@ -432,7 +434,7 @@ const ThesisDetails = ({}) => {
                       : false
                   }
                   onClick={() => asyncCahngeDissertationStatus(0)}
-                  className="bg-[#2080F6] border-2 sm:px-4 self-start w-40 p-2 mt-6 rounded-md text-lg text-[#fff]"
+                  className="bg-[#2080F6] border-2 sm:px-4 self-start w-40 p-2 md:mt-6 rounded-md text-lg text-[#fff]"
                 >
                   {isLoadingBtn ? (
                     <Loding className2={"hidden"} />

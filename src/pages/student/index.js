@@ -11,19 +11,18 @@ import { useEffect } from "react";
 //Services
 import { GetRefreshToken } from "../../services/student";
 //Cookies
-import { Cookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 const Student = () => {
   const [isLogin, setIsLogin] = useState(false);
-  const cookies = new Cookies();
-  const [token, setCookie] = useState(cookies.get("token"));
+  const [cookies] = useCookies(["token"]);
   const navigate = useNavigate();
 
   useEffect(() => {
     asyncRefreshToken();
   }, []);
   const asyncRefreshToken = async () => {
-    const response = await GetRefreshToken(token);
+    const response = await GetRefreshToken(cookies.token);
 
     // console.log("response : ", response.status);
 

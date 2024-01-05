@@ -4,13 +4,12 @@ import { Link } from "react-router-dom";
 //SVG
 import { ReactComponent as Profile } from "../../../../assets/svg/profile-circle.svg";
 import { ReactComponent as ArrowDown } from "../../../../assets/svg/arrow-down.svg";
-import { Cookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 
 const Header = () => {
   const [openProfile, setOpenprofile] = useState(false);
   const [isOpenmodalExit, setIsOpenmodalExit] = useState(false);
-  const cookies = new Cookies();
-  const fullName = cookies.get("fullName");
+  const [cookies] = useCookies(["fullName"]);
 
   const toggleModslStatusHandler = () => {
     setIsOpenmodalExit(!isOpenmodalExit);
@@ -42,18 +41,11 @@ const Header = () => {
             آیا میخواهید از پنل کاربری خود خارج شوید؟
           </p>
           <div className="flex flex-row-reverse justify-between">
-            <Link to={"/"}>
-              <button
-                onClick={() => {
-                  sessionStorage.clear();
-                  cookies.remove("token", { path: "/" });
-                  cookies.remove("fullName", { path: "/" });
-                  cookies.remove("role", { path: "/" });
-                }}
-                className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]"
-              >
-                خروج
-              </button>
+            <Link
+              className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]"
+              to={"/student/logout"}
+            >
+              خروج
             </Link>
             <button
               onClick={toggleModslStatusHandler}
@@ -83,7 +75,7 @@ const Header = () => {
             openProfile ? "rotate-180 duration-300" : "duration-300"
           }`}
         />
-        <span>{fullName}</span>
+        <span>{cookies.fullName}</span>
         <Profile className="cursor-pointer" />
         <div
           className={`absolute flex flex-col top-[5.4rem] left-5 shadow-lg rounded-md to bg-[#fff] p-2 gap-3 ${

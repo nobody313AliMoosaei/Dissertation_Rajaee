@@ -39,18 +39,18 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
   };
 
   useEffect(() => {
-    if (id) {
-      asyncGetUserById();
-    }
-    asyncGetCollageList();
     const data = sessionStorage.getItem("information");
     if (data && Object.keys(data).length > 0) {
       setInformation({ ...JSON.parse(data) });
       setIsSelectTeacher1(false);
+      setIsSelectColleges(true);
       if (information.Teacher_2 !== "" && information.Teacher_2 !== undefined) {
         setIsSelectTeacher2(false);
       }
+    } else if (id) {
+      asyncGetUserById();
     }
+    asyncGetCollageList();
     asyncGetTeacherList();
   }, []);
 
@@ -82,6 +82,7 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
       if (response.status === 200) {
         console.log(response);
         setInformation(response.data);
+        setIsSelectColleges(true);
       } else {
         //error occure
       }
@@ -112,13 +113,15 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
   const notify = () => toast.error("اطلاعات کامل وارد نشده است!!", {});
 
   const handelStoreInformation = () => {
-    // console.log(information);
+    console.log(information);
     if (
       information.firsName === "" ||
       information.lastName === "" ||
       information.Term_Number === "" ||
+      information.Term_Number === undefined ||
       information.collegeRef === "" ||
       information.Teacher_1 === "" ||
+      information.Teacher_1 === undefined ||
       Object.keys(information).length < 5
     ) {
       notify();
@@ -179,7 +182,7 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:h-12 h-10 p-1 sm:text-base text-sm "
               // placeholder=" شماره ترم خود را وارد کنید"
               type={"text"}
-              value={information.Term_Number || ""}
+              value={information.Term_Number}
               name="Term_Number"
             />
           </div>
@@ -211,7 +214,7 @@ const PersonalInformation = ({ stepForwardHandler, id = 0 }) => {
             <select
               name="Teacher_1"
               disabled={!isSelectColleges}
-              value={information.Teacher_1 || ""}
+              value={information.Teacher_1}
               onChange={(e) => {
                 updateData(e);
                 setIsSelectTeacher1(false);

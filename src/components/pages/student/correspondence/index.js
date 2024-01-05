@@ -7,7 +7,7 @@ import { ReactComponent as Coment } from "../../../../assets/svg/coment.svg";
 import Comment from "../../../common/comment";
 import Newletter from "./newletter";
 import ReceivedLetter from "./receivedletter";
-import { Cookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 //Services
 import {
   DownloadDissertation,
@@ -30,8 +30,7 @@ const Correspondence = () => {
   const [data, setData] = useState({});
   const [comment, setComment] = useState([]);
   const [sendComment, setSendComment] = useState({});
-  const cookies = new Cookies();
-  const [token, setCookie] = useState(cookies.get("token"));
+  const [cookies] = useCookies(["token"]);
 
   useEffect(() => {
     asyncGetDissertation();
@@ -44,7 +43,7 @@ const Correspondence = () => {
   };
   const asyncGetDissertation = async () => {
     setIsLoading(true);
-    const response = await GetDissertation(token);
+    const response = await GetDissertation(cookies.token);
     //check repsonse status
     if (response.status === 200) {
       if (response.data.length > 0) {
@@ -68,7 +67,7 @@ const Correspondence = () => {
     const { title, dsr } = sendComment;
     try {
       const response = await SendComment(
-        token,
+        cookies.token,
         data.studentId,
         data.dissertationId,
         title,

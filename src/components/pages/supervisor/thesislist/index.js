@@ -190,7 +190,7 @@ const ThesisList = ({}) => {
             ))
           ) : (
             <div className="flex justify-center mt-5">
-              <span className="flex justify-center bg-[#d67123] w-fit px-10 py-4 rounded-md text-xl  ">
+              <span className="flex justify-center text-white bg-[#237ad6] w-fit px-10 py-4 rounded-md text-xl  ">
                 هیچ اطلاعاتی یافت نشد
               </span>
             </div>

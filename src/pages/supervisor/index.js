@@ -3,21 +3,20 @@ import { Outlet, useNavigate } from "react-router-dom";
 import HeaderSupervisor from "../../components/pages/supervisor/headersupervisor";
 import ThesisDetails from "../../components/pages/supervisor/thesisdetails";
 import ThesisList from "../../components/pages/supervisor/thesislist";
-import { Cookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 import { toast } from "react-toastify";
 import { GetRefreshToken } from "../../services/employees";
 
 const Supervisor = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const cookies = new Cookies();
-  const token = cookies.get("token");
+  const [isLogin, setIsLogin] = useState(false);
+  const [cookies] = useCookies(["token"]);
   const navigate = useNavigate();
 
   useEffect(() => {
     asyncRefreshToken();
   }, []);
   const asyncRefreshToken = async () => {
-    const response = await GetRefreshToken(token);
+    const response = await GetRefreshToken(cookies.token);
 
     // console.log("response : ", response.status);
 

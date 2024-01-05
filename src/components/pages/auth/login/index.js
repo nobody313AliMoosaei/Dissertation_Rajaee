@@ -11,7 +11,7 @@ import { Cookies, useCookies } from "react-cookie";
 import LoadingBtn from "../../../common/loadingBtn";
 
 const Login = () => {
-  const cookies = new Cookies();
+  const [cookies, setCookie] = useCookies(["token", "role", "fullName"]);
   const navigate = useNavigate();
   const recaptcha = useRef();
   const [error, setError] = useState({});
@@ -42,9 +42,9 @@ const Login = () => {
       // console.log("response : ", response.status);
 
       if (response.status === 200) {
-        cookies.set("token", response.data.token);
-        cookies.set("fullName", response.data.fullName);
-        cookies.set("role", response.data.role);
+        setCookie("token", response.data.token, { path: "/" });
+        setCookie("fullName", response.data.fullName, { path: "/" });
+        setCookie("role", response.data.role, { path: "/" });
         console.log(response);
         if (response.data.role === "Administrator") {
           toast.error("اطلاعات وارد شده صحیح نمی باشد");
@@ -58,6 +58,14 @@ const Login = () => {
       } else {
         //error occurre
         toast.error(response.data.errors.message);
+        if (response.data.errors !== undefined) {
+          if (response.data.errors.Password !== undefined) {
+            toast.error(response.data.errors.Password[0]);
+          }
+          if (response.data.errors.UserName !== undefined) {
+            toast.error(response.data.errors.UserName[0]);
+          }
+        }
         console.log("response : ", response);
       }
     }

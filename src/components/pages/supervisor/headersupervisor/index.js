@@ -8,13 +8,12 @@ import { ReactComponent as Profile } from "./../../../../assets/svg/profile-circ
 
 //PNG
 import Logo from "./../../../../assets/image/logo.png";
-import { Cookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 const HeaderSupervisor = () => {
   const [isOpenNavbar, setIsOpenNavbar] = useState(false);
   const [isOpenmodalExit, setIsOpenmodalExit] = useState(false);
   const [scrollPosition, setScrollPosition] = useState();
-  const cookies = new Cookies();
-  const fullName = cookies.get("fullName");
+  const [cookies] = useCookies(["fullName"]);
 
   useEffect(() => {
     window.addEventListener("scroll", listenToScroll);
@@ -50,17 +49,11 @@ const HeaderSupervisor = () => {
             آیا میخواهید از پنل کاربری خود خارج شوید؟
           </p>
           <div className="flex flex-row-reverse justify-between">
-            <Link to={"/"}>
-              <button
-                onClick={() => {
-                  cookies.remove("token", { path: "/" });
-                  cookies.remove("fullName", { path: "/" });
-                  cookies.remove("role", { path: "/" });
-                }}
-                className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]"
-              >
-                خروج
-              </button>
+            <Link
+              className="px-4 py-1 text-[#fff] border-solid border-2 rounded-md bg-[#003B7E]"
+              to={"/employees/logout"}
+            >
+              خروج
             </Link>
             <button
               onClick={() => setIsOpenmodalExit(!isOpenmodalExit)}
@@ -71,8 +64,8 @@ const HeaderSupervisor = () => {
           </div>
         </div>
       </div>
-      <div className="flex w-10/12 sm:justify-between justify-center items-center container mx-auto">
-        <Link className=" mb-3 flex items-center" to={""}>
+      <div className="flex w-10/12 justify-between items-center container mx-auto">
+        <Link className="sm:mb-3 flex items-center" to={""}>
           {/* <img className="w-12 h-12 md:w-20 md:h-20" src={Logo} alt="LOGo" /> */}
           <span className="font-medium text-lg">
             سامانه پایان‌نامه دانشگاه شهید رجایی
@@ -95,23 +88,26 @@ const HeaderSupervisor = () => {
             نمونه پایان‌نامه
           </span> */}
         {/* </div> */}
-        <div className="flex justify-left items-center gap-x-7 xl:gap-x-10 py-3 text-[#52575C]">
+        <div className="flex justify-left items-center gap-x-7 xl:gap-x-10  text-[#52575C]">
           {/* <button
             onClick={toggleNavbarStatusHandler}
             className="block xl:hidden  rounded-lg"
           >
             <Hamburger />
           </button> */}
-          <div className="hidden group sm:flex text-[#fff] justify-center items-center gap-3 relative">
-            <Profile className="stroke-white" />
-            <span>{fullName}</span>
-            <div className="absolute bg-white text-black hidden group-hover:block top-10 py-2 px-4 rounded-md shadow-md min-w-[6rem]">
+          <div className="group sm:flex text-[#fff] sm:py-3 justify-center items-center gap-3 relative">
+            <Profile className="stroke-white hidden sm:block" />
+            <span className="">{cookies.fullName}</span>
+            <div className="absolute flex-col gap-3 hidden bg-white text-black group-hover:flex top-10 py-2 px-4 rounded-md shadow-md min-w-[6rem]">
               <span
                 onClick={() => setIsOpenmodalExit(true)}
                 className="cursor-pointer"
               >
                 خروج
               </span>
+              <Link to={"profile"}>
+                <span className="cursor-pointer">پروفایل</span>
+              </Link>
             </div>
           </div>
           {/* <Link onClick={refreshPage} to={"/login"}>

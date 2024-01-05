@@ -4,7 +4,7 @@ import PersonalInformation from "./personalinformation";
 import ThesisInformation from "./thesisinformation";
 import UploadThesis from "./uploadthesis";
 //Cookies
-import { Cookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 //Services
 import { GetDissertation } from "../../../../services/student";
 import Loding from "../../../common/loding";
@@ -14,8 +14,7 @@ const PreRegistration = () => {
   const [step, setStep] = useState(0);
   const [dissertationData, setDissertationData] = useState({});
   const [isLoading, setIsLoading] = useState(0);
-  const cookies = new Cookies();
-  const [token, setCookie] = useState(cookies.get("token"));
+  const [cookies] = useCookies(["token"]);
 
   useEffect(() => {
     asyncGetDissertation();
@@ -32,12 +31,15 @@ const PreRegistration = () => {
   const asyncGetDissertation = async () => {
     setIsLoading(true);
     try {
-      const response = await GetDissertation(token);
+      const response = await GetDissertation(cookies.token);
 
       //check repsonse status
       if (response.status === 200) {
         if (response.data.length > 0) {
-          setDissertationData(response.data[response.data.length - 1]);
+          if (
+            response.data[response.data.length - 1].statusDissertation !== -3333
+          )
+            setDissertationData(response.data[response.data.length - 1]);
           console.log(response.data[response.data.length - 1]);
           if (response.data[response.data.length - 1].statusDissertation > 0) {
             setStep(3);
