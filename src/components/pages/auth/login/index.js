@@ -88,7 +88,7 @@ const Login = () => {
               name="userName"
               onChange={updateData}
               className="border-2 focus:ring focus:ring-[#003B7E] focus:outline-none focus:border-0 border-[#9B9B9B] rounded-md mt-1 sm:font-medium md:h-12 h-10 p-1 sm:text-base text-sm "
-              placeholder=" شماره دانشجویی خود را وارد کنید"
+              placeholder=" نام کاربری خود را وارد کنید"
               type={"text"}
             />
           </div>

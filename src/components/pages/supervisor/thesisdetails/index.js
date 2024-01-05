@@ -231,12 +231,13 @@ const ThesisDetails = ({}) => {
         (cookies.role === "PostgraduateEducationExpert" &&
           dissertationData.statusDissertation === 6)
       ) {
-        status = -3333;
+        status = 19;
       } else {
         status = -1;
       }
     }
     if (status !== -1) {
+      console.log(status);
       setIsLoadingBtn(true);
       try {
         const response = await CahngeDissertationStatus(
