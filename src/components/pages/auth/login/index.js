@@ -57,7 +57,7 @@ const Login = () => {
         }
       } else {
         //error occurre
-        toast.error("اطلاعات وارد شده صحیح نمی باشد");
+        toast.error(response.data.errors.message);
         console.log("response : ", response);
       }
     }

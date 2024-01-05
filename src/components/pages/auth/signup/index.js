@@ -23,29 +23,46 @@ const SignUp = () => {
   };
 
   const asyncPostUserData = async () => {
-    setIsLoading(true);
     setError({});
 
-    const { userName, nationalCode, email } = dataSingUp;
+    if (dataSingUp.userName.length === 10) {
+      setIsLoading(true);
+      const { userName, nationalCode, email } = dataSingUp;
 
-    const response = await PostUserDataSignUp({
-      userName,
-      nationalCode,
-      email,
-    });
+      const response = await PostUserDataSignUp({
+        userName,
+        nationalCode,
+        email,
+      });
 
-    if (response.status === 200) {
-      toast.success("اطلاعات با موفقیت ثبت شد");
-      // setCookies("token", response.data.token);
-      // console.log(response);
-      navigate("/login");
+      if (response.status === 200) {
+        toast.success("اطلاعات با موفقیت ثبت شد");
+        // setCookies("token", response.data.token);
+        // console.log(response);
+        navigate("/login");
+      } else {
+        //error occurre
+        if (response.data.errors !== undefined) {
+          if (response.data.errors.UserName !== undefined) {
+            toast.error(response.data.errors.UserName[0]);
+          }
+          if (response.data.errors.NationalCode !== undefined) {
+            toast.error(response.data.errors.NationalCode[0]);
+          }
+          if (response.data.errors.Email !== undefined) {
+            toast.error(response.data.errors.Email[0]);
+          }
+        }
+        if (response.data.errorList !== undefined) {
+          toast.error(response.data.errorList[0]);
+        }
+        console.log("response : ", response);
+      }
+
+      setIsLoading(false);
     } else {
-      //error occurre
-      toast.error(response.data.errorList[response.data.errorList.length - 1]);
-      console.log("response : ", response);
+      toast.error("شماره دانشجویی وارد شده صحیح نمیباشد");
     }
-
-    setIsLoading(false);
   };
 
   return (
